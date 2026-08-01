@@ -121,979 +121,1027 @@
       class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"
     ></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-      <!-- HEADER & USER GAMIFICATION BAR -->
-      <header
-        class="glass-card rounded-2xl p-4 sm:p-6 mb-8 flex flex-col lg:flex-row justify-between items-center gap-6 border-b border-white/10"
-      >
-        <div
-          class="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-start"
-        >
-          <div class="flex items-center gap-4">
-            <div class="relative">
-              <div
-                class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-accentPurple via-accentCyan to-accentEmerald p-0.5 glow-purple"
-              >
-                <div
-                  id="userAvatarInitials"
-                  class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center font-mono font-bold text-2xl text-white"
-                >
-                  JM
-                </div>
-              </div>
-              <div
-                class="absolute -bottom-1 -right-1 bg-accentGold text-obsidian font-mono font-bold text-xs px-2 py-0.5 rounded-full border border-obsidian"
-                id="levelBadge"
-              >
-                LVL 1
-              </div>
+    <!-- MAIN APP WRAPPER WITH PERSISTENT SIDEBAR -->
+    <div class="flex min-h-screen">
+      
+      <!-- DESKTOP / MOBILE SIDEBAR -->
+      <aside class="w-64 glass-card border-r border-white/10 hidden lg:flex flex-col justify-between p-6 sticky top-0 h-screen overflow-y-auto">
+        <div>
+          <!-- Sidebar Brand / Logo -->
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-accentPurple to-accentCyan flex items-center justify-center font-mono font-bold text-white glow-purple">
+              M
             </div>
             <div>
-              <div class="flex items-center gap-3 flex-wrap">
-                <h1
-                  id="headerUserName"
-                  class="text-2xl font-bold font-mono tracking-tight text-white"
-                >
-                  Jemark Profile
-                </h1>
-                <span
-                  id="activeTagBadge"
-                  class="text-xs font-semibold px-3 py-1 rounded-full border bg-emerald-500/10 text-emerald-400 border-emerald-500/30 flex items-center gap-1 glow-emerald"
-                >
-                  🌱 Novice Tracker
-                </span>
-              </div>
-              <p class="text-xs text-gray-400 mt-1 flex items-center gap-2">
-                <span id="userRoleText">EIM Specialist & Fitness Tracker</span>
-                •
-                <span class="text-accentCyan font-mono"
-                  >Target: <span id="headerGoalText">Fat Loss</span></span
-                >
-              </p>
+              <h2 class="font-mono text-sm font-bold text-white tracking-tight">MARIFE'S DIET</h2>
+              <span class="text-[10px] text-accentCyan font-mono">CONTROL ENGINE v2.6</span>
             </div>
           </div>
 
-          <!-- Quick User Switcher Dropdown (Mobile/Desktop Header) -->
-          <div
-            class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-xl border border-white/10"
-          >
-            <i data-lucide="users" class="w-4 h-4 text-accentCyan"></i>
-            <select
-              id="activeUserSelectHeader"
-              onchange="switchUser(this.value)"
-              class="bg-transparent text-xs text-white font-mono focus:outline-none cursor-pointer pr-1"
+          <!-- Sidebar Navigation Menu -->
+          <nav class="space-y-1.5">
+            <p class="text-[10px] font-mono text-gray-500 uppercase px-3 mb-2 tracking-wider">Features Menu</p>
+            
+            <button
+              onclick="switchTab('meals')"
+              id="sidebarBtn-meals"
+              class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 bg-white/10 text-white transition"
             >
-              <!-- Populated Dynamically -->
-            </select>
-          </div>
+              <i data-lucide="utensils" class="w-4 h-4 text-accentEmerald"></i> Meal Diary
+            </button>
+            
+            <button
+              onclick="switchTab('schedule')"
+              id="sidebarBtn-schedule"
+              class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
+            >
+              <i data-lucide="clock" class="w-4 h-4 text-accentGold"></i> Meal Times & Alerts
+            </button>
+            
+            <button
+              onclick="switchTab('workouts')"
+              id="sidebarBtn-workouts"
+              class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
+            >
+              <i data-lucide="flame" class="w-4 h-4 text-accentRose"></i> Exercise (MET)
+            </button>
+            
+            <button
+              onclick="switchTab('quests')"
+              id="sidebarBtn-quests"
+              class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
+            >
+              <i data-lucide="award" class="w-4 h-4 text-accentGold"></i> Vault & Quests
+            </button>
+            
+            <button
+              onclick="switchTab('profile')"
+              id="sidebarBtn-profile"
+              class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
+            >
+              <i data-lucide="sliders" class="w-4 h-4 text-accentCyan"></i> Biometrics Engine
+            </button>
+            
+            <button
+              onclick="switchTab('users')"
+              id="sidebarBtn-users"
+              class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
+            >
+              <i data-lucide="users" class="w-4 h-4 text-accentPurple"></i> User Management
+            </button>
+          </nav>
         </div>
 
-        <!-- XP Progression Bar -->
-        <div class="w-full lg:w-96 glass-card p-4 rounded-xl bg-slate-900/50">
-          <div class="flex justify-between items-center text-xs mb-2">
-            <span class="text-gray-400 font-mono">XP PROGRESSION</span>
-            <span class="text-accentGold font-mono font-bold" id="xpText"
-              >0 / 100 XP</span
-            >
+        <!-- Sidebar Footer / Quick Cellphone Notification Status Widget -->
+        <div class="pt-4 border-t border-white/10">
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/5 space-y-2">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="text-gray-400 flex items-center gap-1.5"><i data-lucide="smartphone" class="w-3.5 h-3.5 text-accentGold"></i> Alerts</span>
+              <span id="sidebarAlertStatus" class="text-accentGold font-bold text-[10px]">ACTIVE</span>
+            </div>
+            <p class="text-[10px] text-gray-500 leading-tight">Cell/Push alarms enabled for Philippine & Fast Food meal tracking.</p>
           </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT CONTAINER -->
+      <div class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        
+        <!-- MOBILE TOP NAVBAR FOR FEATURES (Visible on small screens) -->
+        <div class="lg:hidden glass-card rounded-2xl p-3 mb-6 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-accentPurple flex items-center justify-center font-mono font-bold text-white text-xs">M</div>
+            <span class="font-mono text-xs font-bold text-white">Diet Control</span>
+          </div>
+          <select onchange="switchTab(this.value)" id="mobileNavSelect" class="bg-slate-900 text-xs font-mono text-white p-2 rounded-xl border border-white/10 focus:outline-none">
+            <option value="meals">Meal Diary</option>
+            <option value="schedule">Meal Times & Alerts</option>
+            <option value="workouts">Exercise (MET)</option>
+            <option value="quests">Vault & Quests</option>
+            <option value="profile">Biometrics Engine</option>
+            <option value="users">User Management</option>
+          </select>
+        </div>
+
+        <!-- HEADER & USER GAMIFICATION BAR -->
+        <header
+          class="glass-card rounded-2xl p-4 sm:p-6 mb-8 flex flex-col lg:flex-row justify-between items-center gap-6 border-b border-white/10"
+        >
           <div
-            class="w-full bg-gray-800 h-3 rounded-full overflow-hidden p-0.5 border border-white/5"
+            class="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-start"
           >
+            <div class="flex items-center gap-4">
+              <div class="relative">
+                <div
+                  class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-accentPurple via-accentCyan to-accentEmerald p-0.5 glow-purple"
+                >
+                  <div
+                    id="userAvatarInitials"
+                    class="w-full h-full bg-obsidian rounded-[14px] flex items-center justify-center font-mono font-bold text-2xl text-white"
+                  >
+                    JM
+                  </div>
+                </div>
+                <div
+                  class="absolute -bottom-1 -right-1 bg-accentGold text-obsidian font-mono font-bold text-xs px-2 py-0.5 rounded-full border border-obsidian"
+                  id="levelBadge"
+                >
+                  LVL 1
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center gap-3 flex-wrap">
+                  <h1
+                    id="headerUserName"
+                    class="text-2xl font-bold font-mono tracking-tight text-white"
+                  >
+                    Jemark Profile
+                  </h1>
+                  <span
+                    id="activeTagBadge"
+                    class="text-xs font-semibold px-3 py-1 rounded-full border bg-emerald-500/10 text-emerald-400 border-emerald-500/30 flex items-center gap-1 glow-emerald"
+                  >
+                    🌱 Novice Tracker
+                  </span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1 flex items-center gap-2">
+                  <span id="userRoleText">EIM Specialist & Fitness Tracker</span>
+                  •
+                  <span class="text-accentCyan font-mono"
+                    >Target: <span id="headerGoalText">Fat Loss</span></span
+                  >
+                </p>
+              </div>
+            </div>
+
+            <!-- Quick User Switcher Dropdown -->
             <div
-              id="xpProgressBar"
-              class="bg-gradient-to-r from-accentGold via-amber-400 to-accentEmerald h-full rounded-full transition-all duration-500"
-              style="width: 0%"
-            ></div>
+              class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-xl border border-white/10"
+            >
+              <i data-lucide="users" class="w-4 h-4 text-accentCyan"></i>
+              <select
+                id="activeUserSelectHeader"
+                onchange="switchUser(this.value)"
+                class="bg-transparent text-xs text-white font-mono focus:outline-none cursor-pointer pr-1"
+              >
+                <!-- Populated Dynamically -->
+              </select>
+            </div>
           </div>
-          <p class="text-[10px] text-gray-500 mt-1.5 text-right font-mono">
-            Next level unlocks new title tags & rewards
-          </p>
-        </div>
-      </header>
 
-      <!-- MAIN DASHBOARD GRID -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <!-- LEFT COLUMN: STATS & MACROS (4 COLS) -->
-        <div class="lg:col-span-4 space-y-6">
-          <!-- MAIN METRICS OVERVIEW CARD -->
-          <div
-            class="glass-card glass-card-glow rounded-2xl p-6 relative overflow-hidden"
-          >
-            <div class="flex justify-between items-center mb-6">
+          <!-- XP Progression Bar -->
+          <div class="w-full lg:w-96 glass-card p-4 rounded-xl bg-slate-900/50">
+            <div class="flex justify-between items-center text-xs mb-2">
+              <span class="text-gray-400 font-mono">XP PROGRESSION</span>
+              <span class="text-accentGold font-mono font-bold" id="xpText"
+                >0 / 100 XP</span
+              >
+            </div>
+            <div
+              class="w-full bg-gray-800 h-3 rounded-full overflow-hidden p-0.5 border border-white/5"
+            >
+              <div
+                id="xpProgressBar"
+                class="bg-gradient-to-r from-accentGold via-amber-400 to-accentEmerald h-full rounded-full transition-all duration-500"
+                style="width: 0%"
+              ></div>
+            </div>
+            <p class="text-[10px] text-gray-500 mt-1.5 text-right font-mono">
+              Next level unlocks new title tags & rewards
+            </p>
+          </div>
+        </header>
+
+        <!-- MAIN DASHBOARD GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <!-- LEFT COLUMN: STATS & MACROS (4 COLS) -->
+          <div class="lg:col-span-4 space-y-6">
+            <!-- MAIN METRICS OVERVIEW CARD -->
+            <div
+              class="glass-card glass-card-glow rounded-2xl p-6 relative overflow-hidden"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <h2
+                  class="font-mono text-sm uppercase text-gray-400 tracking-wider flex items-center gap-2"
+                >
+                  <i data-lucide="activity" class="w-4 h-4 text-accentCyan"></i>
+                  Daily Budget
+                </h2>
+                <span class="text-xs font-mono text-gray-500" id="currentDateText"
+                  >Today</span
+                >
+              </div>
+
+              <!-- Calorie Big Number -->
+              <div class="text-center my-4">
+                <div class="inline-flex flex-col items-center justify-center">
+                  <span
+                    class="text-5xl font-black font-mono tracking-tight text-white"
+                    id="netCaloriesText"
+                    >0</span
+                  >
+                  <span
+                    class="text-xs text-gray-400 uppercase tracking-widest mt-1"
+                    >Net Calories (kcal)</span
+                  >
+                </div>
+              </div>
+
+              <!-- Breakdown Grid -->
+              <div
+                class="grid grid-cols-3 gap-2 text-center pt-4 border-t border-white/10 mt-6"
+              >
+                <div class="p-2 rounded-lg bg-white/5">
+                  <div class="text-xs text-gray-400">Target</div>
+                  <div
+                    class="font-mono font-bold text-accentCyan text-sm mt-0.5"
+                    id="targetCalText"
+                  >
+                    0
+                  </div>
+                </div>
+                <div class="p-2 rounded-lg bg-white/5">
+                  <div class="text-xs text-gray-400">Eaten</div>
+                  <div
+                    class="font-mono font-bold text-accentGold text-sm mt-0.5"
+                    id="eatenCalText"
+                  >
+                    0
+                  </div>
+                </div>
+                <div class="p-2 rounded-lg bg-white/5">
+                  <div class="text-xs text-gray-400">Burned</div>
+                  <div
+                    class="font-mono font-bold text-accentRose text-sm mt-0.5"
+                    id="burnedCalText"
+                  >
+                    0
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MACRO DISTRIBUTION CARD -->
+            <div class="glass-card glass-card-glow rounded-2xl p-6 space-y-5">
               <h2
                 class="font-mono text-sm uppercase text-gray-400 tracking-wider flex items-center gap-2"
               >
-                <i data-lucide="activity" class="w-4 h-4 text-accentCyan"></i>
-                Daily Budget
+                <i data-lucide="pie-chart" class="w-4 h-4 text-accentPurple"></i>
+                Macro Targets
               </h2>
-              <span class="text-xs font-mono text-gray-500" id="currentDateText"
-                >Today</span
-              >
-            </div>
 
-            <!-- Calorie Big Number -->
-            <div class="text-center my-4">
-              <div class="inline-flex flex-col items-center justify-center">
-                <span
-                  class="text-5xl font-black font-mono tracking-tight text-white"
-                  id="netCaloriesText"
-                  >0</span
-                >
-                <span
-                  class="text-xs text-gray-400 uppercase tracking-widest mt-1"
-                  >Net Calories (kcal)</span
-                >
-              </div>
-            </div>
-
-            <!-- Breakdown Grid -->
-            <div
-              class="grid grid-cols-3 gap-2 text-center pt-4 border-t border-white/10 mt-6"
-            >
-              <div class="p-2 rounded-lg bg-white/5">
-                <div class="text-xs text-gray-400">Target</div>
-                <div
-                  class="font-mono font-bold text-accentCyan text-sm mt-0.5"
-                  id="targetCalText"
-                >
-                  0
-                </div>
-              </div>
-              <div class="p-2 rounded-lg bg-white/5">
-                <div class="text-xs text-gray-400">Eaten</div>
-                <div
-                  class="font-mono font-bold text-accentGold text-sm mt-0.5"
-                  id="eatenCalText"
-                >
-                  0
-                </div>
-              </div>
-              <div class="p-2 rounded-lg bg-white/5">
-                <div class="text-xs text-gray-400">Burned</div>
-                <div
-                  class="font-mono font-bold text-accentRose text-sm mt-0.5"
-                  id="burnedCalText"
-                >
-                  0
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- MACRO DISTRIBUTION CARD -->
-          <div class="glass-card glass-card-glow rounded-2xl p-6 space-y-5">
-            <h2
-              class="font-mono text-sm uppercase text-gray-400 tracking-wider flex items-center gap-2"
-            >
-              <i data-lucide="pie-chart" class="w-4 h-4 text-accentPurple"></i>
-              Macro Targets
-            </h2>
-
-            <!-- Protein -->
-            <div>
-              <div class="flex justify-between text-xs mb-1.5">
-                <span class="text-gray-300 font-medium">Protein</span>
-                <span class="font-mono text-accentEmerald" id="proteinText"
-                  >0g / 0g</span
-                >
-              </div>
-              <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                <div
-                  id="proteinBar"
-                  class="bg-accentEmerald h-full transition-all duration-300"
-                  style="width: 0%"
-                ></div>
-              </div>
-            </div>
-
-            <!-- Carbs -->
-            <div>
-              <div class="flex justify-between text-xs mb-1.5">
-                <span class="text-gray-300 font-medium">Carbohydrates</span>
-                <span class="font-mono text-accentCyan" id="carbsText"
-                  >0g / 0g</span
-                >
-              </div>
-              <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                <div
-                  id="carbsBar"
-                  class="bg-accentCyan h-full transition-all duration-300"
-                  style="width: 0%"
-                ></div>
-              </div>
-            </div>
-
-            <!-- Fats -->
-            <div>
-              <div class="flex justify-between text-xs mb-1.5">
-                <span class="text-gray-300 font-medium">Fats</span>
-                <span class="font-mono text-accentGold" id="fatsText"
-                  >0g / 0g</span
-                >
-              </div>
-              <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                <div
-                  id="fatsBar"
-                  class="bg-accentGold h-full transition-all duration-300"
-                  style="width: 0%"
-                ></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- SMART DEFICIT & CHEAT DAY BALANCER -->
-          <div
-            class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentPurple"
-          >
-            <div class="flex items-center justify-between mb-3">
-              <h3
-                class="font-mono text-sm font-bold text-accentPurple flex items-center gap-2"
-              >
-                <i data-lucide="scale" class="w-4 h-4"></i> Cheat Day Balancer
-              </h3>
-              <span
-                class="text-[10px] font-mono bg-accentPurple/20 text-accentPurple px-2 py-0.5 rounded"
-                >AUTO-OFFSET</span
-              >
-            </div>
-            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
-              Had an over-indulgent meal? Input your calorie surplus, and our
-              algorithm will smooth out your calorie target over the next 2-5
-              days!
-            </p>
-
-            <form id="balancerForm" class="space-y-3">
+              <!-- Protein -->
               <div>
-                <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                  >SURPLUS CALORIES (KCAL)</label
-                >
-                <input
-                  type="number"
-                  id="surplusInput"
-                  placeholder="e.g. 750"
-                  min="50"
-                  max="3000"
-                  class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentPurple"
-                />
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-gray-300 font-medium">Protein</span>
+                  <span class="font-mono text-accentEmerald" id="proteinText"
+                    >0g / 0g</span
+                  >
+                </div>
+                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                  <div
+                    id="proteinBar"
+                    class="bg-accentEmerald h-full transition-all duration-300"
+                    style="width: 0%"
+                  ></div>
+                </div>
               </div>
+
+              <!-- Carbs -->
               <div>
-                <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                  >SPREAD OVER (DAYS)</label
-                >
-                <select
-                  id="spreadDaysInput"
-                  class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentPurple"
-                >
-                  <option value="2">2 Days</option>
-                  <option value="3" selected>3 Days</option>
-                  <option value="4">4 Days</option>
-                  <option value="5">5 Days</option>
-                </select>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-gray-300 font-medium">Carbohydrates</span>
+                  <span class="font-mono text-accentCyan" id="carbsText"
+                    >0g / 0g</span
+                  >
+                </div>
+                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                  <div
+                    id="carbsBar"
+                    class="bg-accentCyan h-full transition-all duration-300"
+                    style="width: 0%"
+                  ></div>
+                </div>
               </div>
-              <div class="flex gap-2 pt-1">
-                <button
-                  type="submit"
-                  class="w-full bg-accentPurple hover:bg-purple-600 text-white font-semibold text-xs py-2.5 rounded-xl transition duration-200"
-                >
-                  Apply Rebalance
-                </button>
-                <button
-                  type="button"
-                  onclick="resetRebalance()"
-                  class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold text-xs px-3 rounded-xl transition duration-200"
-                >
-                  Reset
-                </button>
+
+              <!-- Fats -->
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-gray-300 font-medium">Fats</span>
+                  <span class="font-mono text-accentGold" id="fatsText"
+                    >0g / 0g</span
+                  >
+                </div>
+                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                  <div
+                    id="fatsBar"
+                    class="bg-accentGold h-full transition-all duration-300"
+                    style="width: 0%"
+                  ></div>
+                </div>
               </div>
-            </form>
-            <div
-              id="balancerStatus"
-              class="hidden mt-3 p-2.5 rounded-xl bg-accentPurple/10 border border-accentPurple/30 text-[11px] text-purple-300 font-mono text-center"
-            ></div>
-          </div>
-        </div>
+            </div>
 
-        <!-- RIGHT COLUMN: INTERACTIVE TABS & LOGGING (8 COLS) -->
-        <div class="lg:col-span-8 space-y-6">
-          <!-- CONTROLS & NAVIGATION TABS -->
-          <div
-            class="glass-card rounded-2xl p-2 flex flex-wrap gap-2 border-white/10"
-          >
-            <button
-              onclick="switchTab('meals')"
-              id="tabBtn-meals"
-              class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs font-semibold font-mono flex items-center justify-center gap-2 bg-white/10 text-white transition"
-            >
-              <i data-lucide="utensils" class="w-4 h-4"></i> Meal Diary
-            </button>
-            <button
-              onclick="switchTab('schedule')"
-              id="tabBtn-schedule"
-              class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs font-semibold font-mono flex items-center justify-center gap-2 text-gray-400 hover:text-white transition"
-            >
-              <i data-lucide="clock" class="w-4 h-4 text-accentGold"></i> Meal
-              Times
-            </button>
-            <button
-              onclick="switchTab('workouts')"
-              id="tabBtn-workouts"
-              class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs font-semibold font-mono flex items-center justify-center gap-2 text-gray-400 hover:text-white transition"
-            >
-              <i data-lucide="flame" class="w-4 h-4"></i> Exercise (MET)
-            </button>
-            <button
-              onclick="switchTab('quests')"
-              id="tabBtn-quests"
-              class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs font-semibold font-mono flex items-center justify-center gap-2 text-gray-400 hover:text-white transition"
-            >
-              <i data-lucide="award" class="w-4 h-4"></i> Vault & Quests
-            </button>
-            <button
-              onclick="switchTab('profile')"
-              id="tabBtn-profile"
-              class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs font-semibold font-mono flex items-center justify-center gap-2 text-gray-400 hover:text-white transition"
-            >
-              <i data-lucide="settings" class="w-4 h-4"></i> Biometrics Engine
-            </button>
-            <button
-              onclick="switchTab('users')"
-              id="tabBtn-users"
-              class="tab-btn flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-xs font-semibold font-mono flex items-center justify-center gap-2 text-gray-400 hover:text-white transition"
-            >
-              <i data-lucide="users" class="w-4 h-4"></i> User Management
-            </button>
-          </div>
-
-          <!-- TAB CONTENT 1: MEAL DIARY -->
-          <div id="tabContent-meals" class="tab-content space-y-6">
-            <!-- FOOD CALORIE SEARCH ENGINE -->
+            <!-- SMART DEFICIT & CHEAT DAY BALANCER -->
             <div
-              class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentCyan"
+              class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentPurple"
             >
               <div class="flex items-center justify-between mb-3">
                 <h3
-                  class="font-mono text-sm uppercase text-gray-200 tracking-wider flex items-center gap-2"
+                  class="font-mono text-sm font-bold text-accentPurple flex items-center gap-2"
                 >
-                  <i data-lucide="search" class="w-4 h-4 text-accentCyan"></i>
-                  Food Database & Calorie Search
+                  <i data-lucide="scale" class="w-4 h-4"></i> Cheat Day Balancer
                 </h3>
                 <span
-                  class="text-[10px] font-mono bg-accentCyan/20 text-accentCyan px-2 py-0.5 rounded"
-                  id="foodDatabaseCount"
+                  class="text-[10px] font-mono bg-accentPurple/20 text-accentPurple px-2 py-0.5 rounded"
+                  >AUTO-OFFSET</span
                 >
-                  50+ FOODS
-                </span>
               </div>
-              <p class="text-xs text-gray-400 mb-4">
-                Type any food item (e.g.
-                <i>Chicken, Rice, Egg, Adobo, Pizza, Mango, Salmon, Oats</i>) to
-                see its calorie count and macros. Click <b>"Quick Add"</b> to
-                log it instantly!
+              <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+                Had an over-indulgent meal? Input your calorie surplus, and our
+                algorithm will smooth out your calorie target over the next 2-5
+                days!
               </p>
 
-              <!-- Search Bar Input -->
-              <div class="relative mb-4">
-                <input
-                  type="text"
-                  id="foodSearchInput"
-                  oninput="handleFoodSearch()"
-                  placeholder="Search food (e.g. Chicken, Rice, Egg, Pizza, Apple, Adobo, Steak)..."
-                  class="w-full bg-slate-900 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accentCyan"
-                />
-                <i
-                  data-lucide="search"
-                  class="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5"
-                ></i>
-              </div>
-
-              <!-- Search Results Grid -->
-              <div
-                id="foodSearchResults"
-                class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-72 overflow-y-auto pr-1"
-              >
-                <!-- Dynamically Populated Search Cards -->
-              </div>
-            </div>
-
-            <!-- Quick Add Meal Card (Manual Form) -->
-            <div class="glass-card glass-card-glow rounded-2xl p-6">
-              <h3
-                class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4 flex items-center gap-2"
-              >
-                <i
-                  data-lucide="plus-circle"
-                  class="w-4 h-4 text-accentEmerald"
-                ></i>
-                Log Custom Meal / Food Item
-              </h3>
-              <form
-                id="mealForm"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3"
-              >
-                <div class="lg:col-span-4">
+              <form id="balancerForm" class="space-y-3">
+                <div>
                   <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >FOOD NAME</label
+                    >SURPLUS CALORIES (KCAL)</label
                   >
                   <input
-                    type="text"
-                    id="foodNameInput"
-                    required
-                    placeholder="e.g. Grilled Chicken Breast"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentEmerald"
+                    type="number"
+                    id="surplusInput"
+                    placeholder="e.g. 750"
+                    min="50"
+                    max="3000"
+                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentPurple"
                   />
                 </div>
-                <div class="lg:col-span-3">
+                <div>
                   <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >MEAL SLOT</label
+                    >SPREAD OVER (DAYS)</label
                   >
                   <select
-                    id="mealTypeInput"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentEmerald"
+                    id="spreadDaysInput"
+                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentPurple"
                   >
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch" selected>Lunch</option>
-                    <option value="dinner">Dinner</option>
-                    <option value="snack">Snack</option>
+                    <option value="2">2 Days</option>
+                    <option value="3" selected>3 Days</option>
+                    <option value="4">4 Days</option>
+                    <option value="5">5 Days</option>
                   </select>
                 </div>
-                <div class="lg:col-span-2">
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >CALORIES</label
-                  >
-                  <input
-                    type="number"
-                    id="caloriesInput"
-                    required
-                    placeholder="165"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentEmerald"
-                  />
-                </div>
-                <div class="lg:col-span-3 flex items-end">
+                <div class="flex gap-2 pt-1">
                   <button
                     type="submit"
-                    class="w-full bg-accentEmerald hover:bg-emerald-600 text-obsidian font-bold text-xs py-2.5 rounded-xl transition duration-200 flex items-center justify-center gap-2"
+                    class="w-full bg-accentPurple hover:bg-purple-600 text-white font-semibold text-xs py-2.5 rounded-xl transition duration-200"
                   >
-                    <i data-lucide="check" class="w-4 h-4"></i> Add Meal (+25
-                    XP)
+                    Apply Rebalance
+                  </button>
+                  <button
+                    type="button"
+                    onclick="resetRebalance()"
+                    class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold text-xs px-3 rounded-xl transition duration-200"
+                  >
+                    Reset
                   </button>
                 </div>
-
-                <!-- Macros Sub-row -->
-                <div class="lg:col-span-4">
-                  <label class="block text-[10px] font-mono text-gray-500 mb-1"
-                    >PROTEIN (G)</label
-                  >
-                  <input
-                    type="number"
-                    id="proteinInput"
-                    placeholder="31"
-                    class="w-full bg-slate-900/60 border border-white/5 rounded-lg px-2.5 py-1.5 text-xs text-white"
-                  />
-                </div>
-                <div class="lg:col-span-4">
-                  <label class="block text-[10px] font-mono text-gray-500 mb-1"
-                    >CARBS (G)</label
-                  >
-                  <input
-                    type="number"
-                    id="carbsInput"
-                    placeholder="0"
-                    class="w-full bg-slate-900/60 border border-white/5 rounded-lg px-2.5 py-1.5 text-xs text-white"
-                  />
-                </div>
-                <div class="lg:col-span-4">
-                  <label class="block text-[10px] font-mono text-gray-500 mb-1"
-                    >FATS (G)</label
-                  >
-                  <input
-                    type="number"
-                    id="fatsInput"
-                    placeholder="3.6"
-                    class="w-full bg-slate-900/60 border border-white/5 rounded-lg px-2.5 py-1.5 text-xs text-white"
-                  />
-                </div>
               </form>
-            </div>
-
-            <!-- Daily Meal Log List -->
-            <div class="glass-card glass-card-glow rounded-2xl p-6">
-              <div class="flex justify-between items-center mb-6">
-                <h3
-                  class="font-mono text-sm uppercase text-gray-300 tracking-wider"
-                >
-                  Today's Schedule
-                </h3>
-                <span class="text-xs text-gray-500 font-mono" id="mealCountText"
-                  >0 items logged</span
-                >
-              </div>
-
-              <div id="mealScheduleList" class="space-y-3">
-                <!-- Dynamic Content Rendered Here -->
-              </div>
+              <div
+                id="balancerStatus"
+                class="hidden mt-3 p-2.5 rounded-xl bg-accentPurple/10 border border-accentPurple/30 text-[11px] text-purple-300 font-mono text-center"
+              ></div>
             </div>
           </div>
 
-          <!-- TAB CONTENT: EXACT MEAL TIMES & NOTIFICATIONS -->
-          <div id="tabContent-schedule" class="tab-content space-y-6 hidden">
-            <div
-              class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentGold"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div>
+          <!-- RIGHT COLUMN: INTERACTIVE TABS & LOGGING (8 COLS) -->
+          <div class="lg:col-span-8 space-y-6">
+
+            <!-- TAB CONTENT 1: MEAL DIARY -->
+            <div id="tabContent-meals" class="tab-content space-y-6">
+              <!-- FOOD CALORIE SEARCH ENGINE (Philippine Foods & Fast Foods Included) -->
+              <div
+                class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentCyan"
+              >
+                <div class="flex items-center justify-between mb-3">
                   <h3
                     class="font-mono text-sm uppercase text-gray-200 tracking-wider flex items-center gap-2"
                   >
-                    <i data-lucide="bell" class="w-4 h-4 text-accentGold"></i>
-                    Exact Meal Schedule & Push Notifications
+                    <i data-lucide="search" class="w-4 h-4 text-accentCyan"></i>
+                    Food Database & Calorie Search (Pinoy & Fast Foods)
                   </h3>
-                  <p class="text-xs text-gray-400 mt-1">
-                    Set specific target times for Breakfast, Lunch, Dinner, and
-                    Snacks. You will receive live alerts when it's time to eat!
-                  </p>
+                  <span
+                    class="text-[10px] font-mono bg-accentCyan/20 text-accentCyan px-2 py-0.5 rounded"
+                    id="foodDatabaseCount"
+                  >
+                    60+ FOODS
+                  </span>
                 </div>
-                <button
-                  type="button"
-                  onclick="requestNotificationPermission()"
-                  class="bg-accentGold/20 hover:bg-accentGold hover:text-obsidian text-accentGold text-xs font-mono font-bold px-3 py-1.5 rounded-xl transition border border-accentGold/30 flex items-center gap-1.5"
+                <p class="text-xs text-gray-400 mb-4">
+                  Search Filipino favorites (<i>Chicken Adobo, Pork Sinigang, Halo-Halo, Pancit, Lumpia, Sisig, Mang Inasal</i>) or fast food items (<i>Jollibee Chickenjoy, McDonald's Burger, Fries</i>). Click <b>"Quick Add"</b> to log instantly!
+                </p>
+
+                <!-- Search Bar Input -->
+                <div class="relative mb-4">
+                  <input
+                    type="text"
+                    id="foodSearchInput"
+                    oninput="handleFoodSearch()"
+                    placeholder="Search Pinoy dishes, fast food, or ingredients (e.g. Adobo, Sinigang, Chickenjoy, Rice)..."
+                    class="w-full bg-slate-900 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accentCyan"
+                  />
+                  <i
+                    data-lucide="search"
+                    class="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5"
+                  ></i>
+                </div>
+
+                <!-- Search Results Grid -->
+                <div
+                  id="foodSearchResults"
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-72 overflow-y-auto pr-1"
                 >
-                  <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Enable
-                  Browser Alerts
-                </button>
+                  <!-- Dynamically Populated Search Cards -->
+                </div>
               </div>
 
-              <form
-                id="mealTimesForm"
-                class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"
-              >
-                <!-- Breakfast Time -->
-                <div
-                  class="p-4 rounded-xl bg-slate-900/70 border border-white/10 flex items-center justify-between"
+              <!-- Quick Add Meal Card (Manual Form) -->
+              <div class="glass-card glass-card-glow rounded-2xl p-6">
+                <h3
+                  class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4 flex items-center gap-2"
                 >
-                  <div>
-                    <div
-                      class="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase font-mono"
-                    >
-                      <i data-lucide="sun" class="w-4 h-4"></i> Breakfast
-                    </div>
-                    <p class="text-[10px] text-gray-400 mt-0.5">
-                      Morning energy meal
-                    </p>
-                  </div>
-                  <input
-                    type="time"
-                    id="timeBreakfast"
-                    class="bg-slate-800 text-white font-mono text-sm rounded-lg px-3 py-1.5 border border-white/10 focus:outline-none focus:border-accentGold"
-                  />
-                </div>
-
-                <!-- Lunch Time -->
-                <div
-                  class="p-4 rounded-xl bg-slate-900/70 border border-white/10 flex items-center justify-between"
+                  <i
+                    data-lucide="plus-circle"
+                    class="w-4 h-4 text-accentEmerald"
+                  ></i>
+                  Log Custom Meal / Food Item
+                </h3>
+                <form
+                  id="mealForm"
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3"
                 >
-                  <div>
-                    <div
-                      class="flex items-center gap-2 text-xs font-bold text-accentCyan uppercase font-mono"
+                  <div class="lg:col-span-4">
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >FOOD NAME</label
                     >
-                      <i data-lucide="sun-medium" class="w-4 h-4"></i> Lunch
-                    </div>
-                    <p class="text-[10px] text-gray-400 mt-0.5">
-                      Mid-day power boost
-                    </p>
+                    <input
+                      type="text"
+                      id="foodNameInput"
+                      required
+                      placeholder="e.g. Chickenjoy 1pc with Rice"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentEmerald"
+                    />
                   </div>
-                  <input
-                    type="time"
-                    id="timeLunch"
-                    class="bg-slate-800 text-white font-mono text-sm rounded-lg px-3 py-1.5 border border-white/10 focus:outline-none focus:border-accentGold"
-                  />
-                </div>
-
-                <!-- Snack Time -->
-                <div
-                  class="p-4 rounded-xl bg-slate-900/70 border border-white/10 flex items-center justify-between"
-                >
-                  <div>
-                    <div
-                      class="flex items-center gap-2 text-xs font-bold text-accentPurple uppercase font-mono"
+                  <div class="lg:col-span-3">
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >MEAL SLOT</label
                     >
-                      <i data-lucide="coffee" class="w-4 h-4"></i> Snack
-                    </div>
-                    <p class="text-[10px] text-gray-400 mt-0.5">
-                      Afternoon refresher
-                    </p>
-                  </div>
-                  <input
-                    type="time"
-                    id="timeSnack"
-                    class="bg-slate-800 text-white font-mono text-sm rounded-lg px-3 py-1.5 border border-white/10 focus:outline-none focus:border-accentGold"
-                  />
-                </div>
-
-                <!-- Dinner Time -->
-                <div
-                  class="p-4 rounded-xl bg-slate-900/70 border border-white/10 flex items-center justify-between"
-                >
-                  <div>
-                    <div
-                      class="flex items-center gap-2 text-xs font-bold text-accentRose uppercase font-mono"
+                    <select
+                      id="mealTypeInput"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentEmerald"
                     >
-                      <i data-lucide="moon" class="w-4 h-4"></i> Dinner
-                    </div>
-                    <p class="text-[10px] text-gray-400 mt-0.5">
-                      Evening recovery meal
-                    </p>
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch" selected>Lunch</option>
+                      <option value="dinner">Dinner</option>
+                      <option value="snack">Snack</option>
+                    </select>
                   </div>
-                  <input
-                    type="time"
-                    id="timeDinner"
-                    class="bg-slate-800 text-white font-mono text-sm rounded-lg px-3 py-1.5 border border-white/10 focus:outline-none focus:border-accentGold"
-                  />
-                </div>
+                  <div class="lg:col-span-2">
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >CALORIES</label
+                    >
+                    <input
+                      type="number"
+                      id="caloriesInput"
+                      required
+                      placeholder="450"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentEmerald"
+                    />
+                  </div>
+                  <div class="lg:col-span-3 flex items-end">
+                    <button
+                      type="submit"
+                      class="w-full bg-accentEmerald hover:bg-emerald-600 text-obsidian font-bold text-xs py-2.5 rounded-xl transition duration-200 flex items-center justify-center gap-2"
+                    >
+                      <i data-lucide="check" class="w-4 h-4"></i> Add Meal (+25
+                      XP)
+                    </button>
+                  </div>
 
-                <div class="sm:col-span-2 pt-2">
-                  <button
-                    type="submit"
-                    class="w-full bg-accentGold hover:bg-amber-600 text-obsidian font-bold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2"
-                  >
-                    <i data-lucide="save" class="w-4 h-4"></i> Save Scheduled
-                    Times & Activate Alerts
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <!-- TAB CONTENT 2: MET WORKOUT BURN -->
-          <div id="tabContent-workouts" class="tab-content space-y-6 hidden">
-            <div class="glass-card glass-card-glow rounded-2xl p-6">
-              <h3
-                class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-2 flex items-center gap-2"
-              >
-                <i data-lucide="zap" class="w-4 h-4 text-accentRose"></i> MET
-                Exercise Burn Calculator
-              </h3>
-              <p class="text-xs text-gray-400 mb-6">
-                Calculates exact calorie burn based on standard Metabolic
-                Equivalent of Task (MET) formulas for your weight.
-              </p>
-
-              <form
-                id="workoutForm"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4"
-              >
-                <div class="lg:col-span-5">
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >EXERCISE / ACTIVITY</label
-                  >
-                  <select
-                    id="exerciseSelect"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentRose"
-                  >
-                    <option value="5.0">
-                      Weightlifting / Resistance Training (MET 5.0)
-                    </option>
-                    <option value="9.8">
-                      Running - 6 mph / 10 km/h (MET 9.8)
-                    </option>
-                    <option value="8.0">
-                      HIIT / Circuit Training (MET 8.0)
-                    </option>
-                    <option value="7.5">
-                      Bicycling - Moderate Effort (MET 7.5)
-                    </option>
-                    <option value="8.0">Swimming Lap Training (MET 8.0)</option>
-                    <option value="3.5">
-                      Brisk Walking - 3.5 mph (MET 3.5)
-                    </option>
-                  </select>
-                </div>
-                <div class="lg:col-span-4">
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >DURATION (MINUTES)</label
-                  >
-                  <input
-                    type="number"
-                    id="workoutDurationInput"
-                    required
-                    placeholder="45"
-                    min="5"
-                    max="300"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentRose"
-                  />
-                </div>
-                <div class="lg:col-span-3 flex items-end">
-                  <button
-                    type="submit"
-                    class="w-full bg-accentRose hover:bg-rose-600 text-white font-bold text-xs py-2.5 rounded-xl transition duration-200 flex items-center justify-center gap-2"
-                  >
-                    <i data-lucide="flame" class="w-4 h-4"></i> Log Workout (+35
-                    XP)
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <!-- Workouts List -->
-            <div class="glass-card glass-card-glow rounded-2xl p-6">
-              <h3
-                class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4"
-              >
-                Completed Exercises
-              </h3>
-              <div id="workoutList" class="space-y-3">
-                <!-- Dynamic Workout Items -->
+                  <!-- Macros Sub-row -->
+                  <div class="lg:col-span-4">
+                    <label class="block text-[10px] font-mono text-gray-500 mb-1"
+                      >PROTEIN (G)</label
+                    >
+                    <input
+                      type="number"
+                      id="proteinInput"
+                      placeholder="25"
+                      class="w-full bg-slate-900/60 border border-white/5 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                    />
+                  </div>
+                  <div class="lg:col-span-4">
+                    <label class="block text-[10px] font-mono text-gray-500 mb-1"
+                      >CARBS (G)</label
+                    >
+                    <input
+                      type="number"
+                      id="carbsInput"
+                      placeholder="40"
+                      class="w-full bg-slate-900/60 border border-white/5 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                    />
+                  </div>
+                  <div class="lg:col-span-4">
+                    <label class="block text-[10px] font-mono text-gray-500 mb-1"
+                      >FATS (G)</label
+                    >
+                    <input
+                      type="number"
+                      id="fatsInput"
+                      placeholder="18"
+                      class="w-full bg-slate-900/60 border border-white/5 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                    />
+                  </div>
+                </form>
               </div>
-            </div>
-          </div>
 
-          <!-- TAB CONTENT 3: QUESTS & TITLE TAG VAULT -->
-          <div id="tabContent-quests" class="tab-content space-y-6 hidden">
-            <!-- UNLOCKABLE TAGS VAULT -->
-            <div class="glass-card glass-card-glow rounded-2xl p-6">
-              <div class="flex items-center justify-between mb-4">
-                <div>
+              <!-- Daily Meal Log List -->
+              <div class="glass-card glass-card-glow rounded-2xl p-6">
+                <div class="flex justify-between items-center mb-6">
                   <h3
-                    class="font-mono text-sm uppercase text-gray-300 tracking-wider flex items-center gap-2"
+                    class="font-mono text-sm uppercase text-gray-300 tracking-wider"
                   >
-                    <i data-lucide="shield" class="w-4 h-4 text-accentGold"></i>
-                    Title Tag Vault
+                    Today's Schedule
                   </h3>
-                  <p class="text-xs text-gray-400 mt-0.5">
-                    Level up your profile to unlock custom glowing titles!
-                  </p>
+                  <span class="text-xs text-gray-500 font-mono" id="mealCountText"
+                    >0 items logged</span
+                  >
                 </div>
-                <span
-                  class="text-xs font-mono text-accentGold bg-accentGold/10 px-3 py-1 rounded-full border border-accentGold/30"
+
+                <div id="mealScheduleList" class="space-y-3">
+                  <!-- Dynamic Content Rendered Here -->
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT: EXACT MEAL TIMES & CELLPHONE NOTIFICATIONS -->
+            <div id="tabContent-schedule" class="tab-content space-y-6 hidden">
+              <div
+                class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentGold"
+              >
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+                  <div>
+                    <h3
+                      class="font-mono text-sm uppercase text-gray-200 tracking-wider flex items-center gap-2"
+                    >
+                      <i data-lucide="smartphone" class="w-4 h-4 text-accentGold"></i>
+                      Cellphone & Device Meal Time Notifications
+                    </h3>
+                    <p class="text-xs text-gray-400 mt-1">
+                      Set target meal hours. Receive immediate audio and push alerts on your cellphone or browser when it's mealtime!
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onclick="requestNotificationPermission()"
+                    class="bg-accentGold/20 hover:bg-accentGold hover:text-obsidian text-accentGold text-xs font-mono font-bold px-3 py-2 rounded-xl transition border border-accentGold/30 flex items-center gap-1.5 whitespace-nowrap"
+                  >
+                    <i data-lucide="bell-ring" class="w-3.5 h-3.5"></i> Enable Cell Alerts
+                  </button>
+                </div>
+
+                <form
+                  id="mealTimesForm"
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"
                 >
-                  Gamification Rewards
-                </span>
+                  <!-- Breakfast Time -->
+                  <div
+                    class="p-4 rounded-xl bg-slate-900/70 border border-white/10 flex items-center justify-between"
+                  >
+                    <div>
+                      <div
+                        class="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase font-mono"
+                      >
+                        <i data-lucide="sun" class="w-4 h-4"></i> Breakfast
+                      </div>
+                      <p class="text-[10px] text-gray-400 mt-0.5">
+                        Morning Pinoy silog meal
+                      </p>
+                    </div>
+                    <input
+                      type="time"
+                      id="timeBreakfast"
+                      class="bg-slate-800 text-white font-mono text-sm rounded-lg px-3 py-1.5 border border-white/10 focus:outline-none focus:border-accentGold"
+                    />
+                  </div>
+
+                  <!-- Lunch Time -->
+                  <div
+                    class="p-4 rounded-xl bg-slate-900/70 border border-white/10 flex items-center justify-between"
+                  >
+                    <div>
+                      <div
+                        class="flex items-center gap-2 text-xs font-bold text-accentCyan uppercase font-mono"
+                      >
+                        <i data-lucide="sun-medium" class="w-4 h-4"></i> Lunch
+                      </div>
+                      <p class="text-[10px] text-gray-400 mt-0.5">
+                        Mid-day viand & rice
+                      </p>
+                    </div>
+                    <input
+                      type="time"
+                      id="timeLunch"
+                      class="bg-slate-800 text-white font-mono text-sm rounded-lg px-3 py-1.5 border border-white/10 focus:outline-none focus:border-accentGold"
+                    />
+                  </div>
+
+                  <!-- Snack Time -->
+                  <div
+                    class="p-4 rounded-xl bg-slate-900/70 border border-white/10 flex items-center justify-between"
+                  >
+                    <div>
+                      <div
+                        class="flex items-center gap-2 text-xs font-bold text-accentPurple uppercase font-mono"
+                      >
+                        <i data-lucide="coffee" class="w-4 h-4"></i> Snack (Mirienda)
+                      </div>
+                      <p class="text-[10px] text-gray-400 mt-0.5">
+                        Afternoon merienda break
+                      </p>
+                    </div>
+                    <input
+                      type="time"
+                      id="timeSnack"
+                      class="bg-slate-800 text-white font-mono text-sm rounded-lg px-3 py-1.5 border border-white/10 focus:outline-none focus:border-accentGold"
+                    />
+                  </div>
+
+                  <!-- Dinner Time -->
+                  <div
+                    class="p-4 rounded-xl bg-slate-900/70 border border-white/10 flex items-center justify-between"
+                  >
+                    <div>
+                      <div
+                        class="flex items-center gap-2 text-xs font-bold text-accentRose uppercase font-mono"
+                      >
+                        <i data-lucide="moon" class="w-4 h-4"></i> Dinner
+                      </div>
+                      <p class="text-[10px] text-gray-400 mt-0.5">
+                        Evening family dinner
+                      </p>
+                    </div>
+                    <input
+                      type="time"
+                      id="timeDinner"
+                      class="bg-slate-800 text-white font-mono text-sm rounded-lg px-3 py-1.5 border border-white/10 focus:outline-none focus:border-accentGold"
+                    />
+                  </div>
+
+                  <div class="sm:col-span-2 pt-2">
+                    <button
+                      type="submit"
+                      class="w-full bg-accentGold hover:bg-amber-600 text-obsidian font-bold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2"
+                    >
+                      <i data-lucide="save" class="w-4 h-4"></i> Save Cellphone Notification Schedule
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT 2: MET WORKOUT BURN -->
+            <div id="tabContent-workouts" class="tab-content space-y-6 hidden">
+              <div class="glass-card glass-card-glow rounded-2xl p-6">
+                <h3
+                  class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-2 flex items-center gap-2"
+                >
+                  <i data-lucide="zap" class="w-4 h-4 text-accentRose"></i> MET
+                  Exercise Burn Calculator
+                </h3>
+                <p class="text-xs text-gray-400 mb-6">
+                  Calculates exact calorie burn based on standard Metabolic
+                  Equivalent of Task (MET) formulas for your weight.
+                </p>
+
+                <form
+                  id="workoutForm"
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4"
+                >
+                  <div class="lg:col-span-5">
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >EXERCISE / ACTIVITY</label
+                    >
+                    <select
+                      id="exerciseSelect"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentRose"
+                    >
+                      <option value="5.0">
+                        Weightlifting / Resistance Training (MET 5.0)
+                      </option>
+                      <option value="9.8">
+                        Running - 6 mph / 10 km/h (MET 9.8)
+                      </option>
+                      <option value="8.0">
+                        HIIT / Circuit Training (MET 8.0)
+                      </option>
+                      <option value="7.5">
+                        Bicycling - Moderate Effort (MET 7.5)
+                      </option>
+                      <option value="8.0">Swimming Lap Training (MET 8.0)</option>
+                      <option value="3.5">
+                        Brisk Walking - 3.5 mph (MET 3.5)
+                      </option>
+                    </select>
+                  </div>
+                  <div class="lg:col-span-4">
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >DURATION (MINUTES)</label
+                    >
+                    <input
+                      type="number"
+                      id="workoutDurationInput"
+                      required
+                      placeholder="45"
+                      min="5"
+                      max="300"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentRose"
+                    />
+                  </div>
+                  <div class="lg:col-span-3 flex items-end">
+                    <button
+                      type="submit"
+                      class="w-full bg-accentRose hover:bg-rose-600 text-white font-bold text-xs py-2.5 rounded-xl transition duration-200 flex items-center justify-center gap-2"
+                    >
+                      <i data-lucide="flame" class="w-4 h-4"></i> Log Workout (+35
+                      XP)
+                    </button>
+                  </div>
+                </form>
               </div>
 
+              <!-- Workouts List -->
+              <div class="glass-card glass-card-glow rounded-2xl p-6">
+                <h3
+                  class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4"
+                >
+                  Completed Exercises
+                </h3>
+                <div id="workoutList" class="space-y-3">
+                  <!-- Dynamic Workout Items -->
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT 3: QUESTS & TITLE TAG VAULT -->
+            <div id="tabContent-quests" class="tab-content space-y-6 hidden">
+              <!-- UNLOCKABLE TAGS VAULT -->
+              <div class="glass-card glass-card-glow rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3
+                      class="font-mono text-sm uppercase text-gray-300 tracking-wider flex items-center gap-2"
+                    >
+                      <i data-lucide="shield" class="w-4 h-4 text-accentGold"></i>
+                      Title Tag Vault
+                    </h3>
+                    <p class="text-xs text-gray-400 mt-0.5">
+                      Level up your profile to unlock custom glowing titles!
+                    </p>
+                  </div>
+                  <span
+                    class="text-xs font-mono text-accentGold bg-accentGold/10 px-3 py-1 rounded-full border border-accentGold/30"
+                  >
+                    Gamification Rewards
+                  </span>
+                </div>
+
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2"
+                  id="tagsVaultGrid"
+                >
+                  <!-- Rendered Dynamic Tags -->
+                </div>
+              </div>
+
+              <!-- DAILY QUESTS CARD -->
+              <div class="glass-card glass-card-glow rounded-2xl p-6">
+                <h3
+                  class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4 flex items-center gap-2"
+                >
+                  <i
+                    data-lucide="check-square"
+                    class="w-4 h-4 text-accentCyan"
+                  ></i>
+                  Daily Quests
+                </h3>
+                <div class="space-y-3" id="questsList">
+                  <!-- Dynamic Quests -->
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT 4: BIOMETRICS & SETTINGS -->
+            <div id="tabContent-profile" class="tab-content space-y-6 hidden">
+              <div class="glass-card glass-card-glow rounded-2xl p-6">
+                <h3
+                  class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-2 flex items-center gap-2"
+                >
+                  <i data-lucide="sliders" class="w-4 h-4 text-accentCyan"></i>
+                  Mifflin-St Jeor Biometrics Engine
+                </h3>
+                <p class="text-xs text-gray-400 mb-6">
+                  Updating your parameters immediately recalculates BMR, TDEE, and
+                  optimal macro distributions.
+                </p>
+
+                <form
+                  id="biometricsForm"
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                >
+                  <div>
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >AGE</label
+                    >
+                    <input
+                      type="number"
+                      id="bioAge"
+                      required
+                      min="12"
+                      max="100"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >GENDER</label
+                    >
+                    <select
+                      id="bioGender"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >WEIGHT (KG)</label
+                    >
+                    <input
+                      type="number"
+                      id="bioWeight"
+                      required
+                      step="0.1"
+                      min="30"
+                      max="250"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >HEIGHT (CM)</label
+                    >
+                    <input
+                      type="number"
+                      id="bioHeight"
+                      required
+                      min="100"
+                      max="230"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >ACTIVITY LEVEL</label
+                    >
+                    <select
+                      id="bioActivity"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                    >
+                      <option value="1.2">Sedentary (Office/Desk)</option>
+                      <option value="1.375">Lightly Active (1-3 days/wk)</option>
+                      <option value="1.55" selected>
+                        Moderately Active (3-5 days/wk)
+                      </option>
+                      <option value="1.725">Very Active (6-7 days/wk)</option>
+                      <option value="1.9">
+                        Extra Active (Hard Physical Job)
+                      </option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >PRIMARY GOAL</label
+                    >
+                    <select
+                      id="bioGoal"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                    >
+                      <option value="fat_loss">Fat Loss (-20% Deficit)</option>
+                      <option value="maintenance">
+                        Maintenance (TDEE Match)
+                      </option>
+                      <option value="muscle_gain">
+                        Muscle Gain (+15% Surplus)
+                      </option>
+                    </select>
+                  </div>
+                  <div class="sm:col-span-2 lg:col-span-3 pt-2">
+                    <button
+                      type="submit"
+                      class="w-full bg-accentCyan hover:bg-cyan-600 text-obsidian font-bold text-xs py-2.5 rounded-xl transition duration-200"
+                    >
+                      Recalculate Biometrics & Target Macros
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT 5: USER MANAGEMENT ENGINE -->
+            <div id="tabContent-users" class="tab-content space-y-6 hidden">
+              <!-- CREATE NEW USER -->
               <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2"
-                id="tagsVaultGrid"
+                class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentGold"
               >
-                <!-- Rendered Dynamic Tags -->
+                <h3
+                  class="font-mono text-sm uppercase text-gray-200 tracking-wider mb-2 flex items-center gap-2"
+                >
+                  <i data-lucide="user-plus" class="w-4 h-4 text-accentGold"></i>
+                  Add / Register New Player
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">
+                  Create a distinct player profile. Each profile tracks isolated
+                  daily logs, levels, XP, and biometric macro targets.
+                </p>
+
+                <form
+                  id="addUserForm"
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3"
+                >
+                  <div class="lg:col-span-4">
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >PLAYER / USER NAME</label
+                    >
+                    <input
+                      type="text"
+                      id="newUserName"
+                      required
+                      placeholder="e.g. Alex"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentGold"
+                    />
+                  </div>
+                  <div class="lg:col-span-5">
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >ROLE / TITLE</label
+                    >
+                    <input
+                      type="newUserRole"
+                      id="newUserRole"
+                      placeholder="e.g. Athlete & Fitness Enthusiast"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentGold"
+                    />
+                  </div>
+                  <div class="lg:col-span-3">
+                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                      >GOAL</label
+                    >
+                    <select
+                      id="newUserGoal"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentGold"
+                    >
+                      <option value="fat_loss">Fat Loss</option>
+                      <option value="maintenance">Maintenance</option>
+                      <option value="muscle_gain">Muscle Gain</option>
+                    </select>
+                  </div>
+                  <div class="lg:col-span-12 pt-2">
+                    <button
+                      type="submit"
+                      class="w-full bg-accentGold hover:bg-amber-600 text-obsidian font-bold text-xs py-2.5 rounded-xl transition duration-200 flex items-center justify-center gap-2"
+                    >
+                      <i data-lucide="plus" class="w-4 h-4"></i> Create Player
+                      Profile
+                    </button>
+                  </div>
+                </form>
               </div>
-            </div>
 
-            <!-- DAILY QUESTS CARD -->
-            <div class="glass-card glass-card-glow rounded-2xl p-6">
-              <h3
-                class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4 flex items-center gap-2"
-              >
-                <i
-                  data-lucide="check-square"
-                  class="w-4 h-4 text-accentCyan"
-                ></i>
-                Daily Quests
-              </h3>
-              <div class="space-y-3" id="questsList">
-                <!-- Dynamic Quests -->
-              </div>
-            </div>
-          </div>
-
-          <!-- TAB CONTENT 4: BIOMETRICS & SETTINGS -->
-          <div id="tabContent-profile" class="tab-content space-y-6 hidden">
-            <div class="glass-card glass-card-glow rounded-2xl p-6">
-              <h3
-                class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-2 flex items-center gap-2"
-              >
-                <i data-lucide="sliders" class="w-4 h-4 text-accentCyan"></i>
-                Mifflin-St Jeor Biometrics Engine
-              </h3>
-              <p class="text-xs text-gray-400 mb-6">
-                Updating your parameters immediately recalculates BMR, TDEE, and
-                optimal macro distributions.
-              </p>
-
-              <form
-                id="biometricsForm"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-              >
-                <div>
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >AGE</label
-                  >
-                  <input
-                    type="number"
-                    id="bioAge"
-                    required
-                    min="12"
-                    max="100"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
-                  />
+              <!-- PROFILES LIST & MANAGEMENT -->
+              <div class="glass-card glass-card-glow rounded-2xl p-6">
+                <h3
+                  class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4 flex items-center gap-2"
+                >
+                  <i data-lucide="users" class="w-4 h-4 text-accentCyan"></i>
+                  Registered Players
+                </h3>
+                <div
+                  id="usersListContainer"
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                >
+                  <!-- User Cards Rendered Here -->
                 </div>
-                <div>
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >GENDER</label
-                  >
-                  <select
-                    id="bioGender"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
-                  >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >WEIGHT (KG)</label
-                  >
-                  <input
-                    type="number"
-                    id="bioWeight"
-                    required
-                    step="0.1"
-                    min="30"
-                    max="250"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
-                  />
-                </div>
-                <div>
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >HEIGHT (CM)</label
-                  >
-                  <input
-                    type="number"
-                    id="bioHeight"
-                    required
-                    min="100"
-                    max="230"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
-                  />
-                </div>
-                <div>
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >ACTIVITY LEVEL</label
-                  >
-                  <select
-                    id="bioActivity"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
-                  >
-                    <option value="1.2">Sedentary (Office/Desk)</option>
-                    <option value="1.375">Lightly Active (1-3 days/wk)</option>
-                    <option value="1.55" selected>
-                      Moderately Active (3-5 days/wk)
-                    </option>
-                    <option value="1.725">Very Active (6-7 days/wk)</option>
-                    <option value="1.9">
-                      Extra Active (Hard Physical Job)
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >PRIMARY GOAL</label
-                  >
-                  <select
-                    id="bioGoal"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
-                  >
-                    <option value="fat_loss">Fat Loss (-20% Deficit)</option>
-                    <option value="maintenance">
-                      Maintenance (TDEE Match)
-                    </option>
-                    <option value="muscle_gain">
-                      Muscle Gain (+15% Surplus)
-                    </option>
-                  </select>
-                </div>
-                <div class="sm:col-span-2 lg:col-span-3 pt-2">
-                  <button
-                    type="submit"
-                    class="w-full bg-accentCyan hover:bg-cyan-600 text-obsidian font-bold text-xs py-2.5 rounded-xl transition duration-200"
-                  >
-                    Recalculate Biometrics & Target Macros
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <!-- TAB CONTENT 5: USER MANAGEMENT ENGINE -->
-          <div id="tabContent-users" class="tab-content space-y-6 hidden">
-            <!-- CREATE NEW USER -->
-            <div
-              class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentGold"
-            >
-              <h3
-                class="font-mono text-sm uppercase text-gray-200 tracking-wider mb-2 flex items-center gap-2"
-              >
-                <i data-lucide="user-plus" class="w-4 h-4 text-accentGold"></i>
-                Add / Register New Player
-              </h3>
-              <p class="text-xs text-gray-400 mb-4">
-                Create a distinct player profile. Each profile tracks isolated
-                daily logs, levels, XP, and biometric macro targets.
-              </p>
-
-              <form
-                id="addUserForm"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3"
-              >
-                <div class="lg:col-span-4">
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >PLAYER / USER NAME</label
-                  >
-                  <input
-                    type="text"
-                    id="newUserName"
-                    required
-                    placeholder="e.g. Alex"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentGold"
-                  />
-                </div>
-                <div class="lg:col-span-5">
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >ROLE / TITLE</label
-                  >
-                  <input
-                    type="text"
-                    id="newUserRole"
-                    placeholder="e.g. Athlete & Fitness Enthusiast"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentGold"
-                  />
-                </div>
-                <div class="lg:col-span-3">
-                  <label class="block text-[11px] font-mono text-gray-400 mb-1"
-                    >GOAL</label
-                  >
-                  <select
-                    id="newUserGoal"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentGold"
-                  >
-                    <option value="fat_loss">Fat Loss</option>
-                    <option value="maintenance">Maintenance</option>
-                    <option value="muscle_gain">Muscle Gain</option>
-                  </select>
-                </div>
-                <div class="lg:col-span-12 pt-2">
-                  <button
-                    type="submit"
-                    class="w-full bg-accentGold hover:bg-amber-600 text-obsidian font-bold text-xs py-2.5 rounded-xl transition duration-200 flex items-center justify-center gap-2"
-                  >
-                    <i data-lucide="plus" class="w-4 h-4"></i> Create Player
-                    Profile
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <!-- PROFILES LIST & MANAGEMENT -->
-            <div class="glass-card glass-card-glow rounded-2xl p-6">
-              <h3
-                class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4 flex items-center gap-2"
-              >
-                <i data-lucide="users" class="w-4 h-4 text-accentCyan"></i>
-                Registered Players
-              </h3>
-              <div
-                id="usersListContainer"
-                class="grid grid-cols-1 sm:grid-cols-2 gap-4"
-              >
-                <!-- User Cards Rendered Here -->
               </div>
             </div>
           </div>
@@ -1103,161 +1151,68 @@
 
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-      // --- DATABASE OF FOOD ITEMS ---
+      // --- DATABASE OF FOOD ITEMS (Including Philippine Foods & Fast Foods)[cite: 1] ---
       const FOOD_DATABASE = [
-        {
-          name: "Chicken Breast (Cooked)",
-          cal: 165,
-          p: 31,
-          c: 0,
-          f: 3.6,
-          unit: "100g",
-        },
-        {
-          name: "White Rice (Cooked)",
-          cal: 130,
-          p: 2.7,
-          c: 28,
-          f: 0.3,
-          unit: "100g",
-        },
-        {
-          name: "Brown Rice (Cooked)",
-          cal: 111,
-          p: 2.6,
-          c: 23,
-          f: 0.9,
-          unit: "100g",
-        },
-        {
-          name: "Whole Egg (Large)",
-          cal: 72,
-          p: 6.3,
-          c: 0.4,
-          f: 4.8,
-          unit: "1 egg",
-        },
-        {
-          name: "Egg White",
-          cal: 17,
-          p: 3.6,
-          c: 0.2,
-          f: 0.1,
-          unit: "1 egg white",
-        },
-        {
-          name: "Chicken Adobo",
-          cal: 245,
-          p: 22,
-          c: 5,
-          f: 15,
-          unit: "1 serving",
-        },
+        // Philippine Foods (Pinoy Delicacies & Viands)[cite: 1]
+        { name: "Chicken Adobo (Adobong Manok)", cal: 245, p: 22, c: 5, f: 15, unit: "1 serving" },
         { name: "Pork Sinigang", cal: 210, p: 18, c: 8, f: 12, unit: "1 bowl" },
+        { name: "Beef Sisig", cal: 320, p: 24, c: 4, f: 22, unit: "1 serving" },
+        { name: "Pork Sisig", cal: 360, p: 20, c: 5, f: 27, unit: "1 serving" },
         { name: "Beef Tapa", cal: 280, p: 26, c: 6, f: 16, unit: "100g" },
+        { name: "Bangsilog (Milkfish, Egg, Rice)", cal: 450, p: 28, c: 45, f: 18, unit: "1 plate" },
+        { name: "Tapsilog (Beef Tapa, Egg, Rice)", cal: 520, p: 30, c: 50, f: 22, unit: "1 plate" },
+        { name: "Pancit Bihon", cal: 230, p: 7, c: 38, f: 6, unit: "1 cup" },
+        { name: "Pancit Canton", cal: 310, p: 8, c: 42, f: 12, unit: "1 serving" },
+        { name: "Lumpiang Shanghai (Spring Rolls)", cal: 75, p: 3, c: 6, f: 4, unit: "1 piece" },
+        { name: "Crispy Pata", cal: 650, p: 35, c: 0, f: 55, unit: "1 serving" },
+        { name: "Lechon Kawali", cal: 580, p: 32, c: 1, f: 48, unit: "100g" },
+        { name: "Bicol Express", cal: 340, p: 18, c: 7, f: 28, unit: "1 serving" },
+        { name: "Dinuguan (Pork Blood Stew)", cal: 290, p: 20, c: 6, f: 20, unit: "1 cup" },
+        { name: "Arroz Caldo (Chicken Rice Porridge)", cal: 220, p: 12, c: 30, f: 5, unit: "1 bowl" },
+        { name: "Champorado (Chocolate Rice Porridge)", cal: 280, p: 6, c: 58, f: 3, unit: "1 bowl" },
+        { name: "Halo-Halo", cal: 380, p: 6, c: 75, f: 7, unit: "1 tall glass" },
+        { name: "Turon (Banana Spring Roll)", cal: 180, p: 2, c: 30, f: 6, unit: "1 piece" },
+        { name: "Bibingka", cal: 210, p: 4, c: 32, f: 8, unit: "1 slice" },
+        { name: "Puto", cal: 50, p: 1, c: 11, f: 0.5, unit: "1 piece" },
+
+        // Popular Fast Foods[cite: 1]
+        { name: "Jollibee Chickenjoy (1pc with Rice)", cal: 420, p: 22, c: 45, f: 18, unit: "1 meal set" },
+        { name: "Jollibee Chickenjoy (2pc with Rice & Gravy)", cal: 740, p: 38, c: 52, f: 34, unit: "1 meal set" },
+        { name: "Jollibee Jolly Spaghetti", cal: 390, p: 10, c: 62, f: 11, unit: "1 regular" },
+        { name: "Jollibee Burger Steak (2pc with Rice)", cal: 510, p: 24, c: 48, f: 25, unit: "1 meal set" },
+        { name: "McDonald's Big Mac", cal: 590, p: 25, c: 46, f: 34, unit: "1 burger" },
+        { name: "McDonald's Cheeseburger", cal: 300, p: 15, c: 32, f: 12, unit: "1 burger" },
+        { name: "McDonald's Chicken McNuggets (6pcs)", cal: 270, p: 14, c: 16, f: 16, unit: "6 pieces" },
+        { name: "French Fries (Medium)", cal: 365, p: 4, c: 48, f: 17, unit: "1 medium" },
+        { name: "Pepperoni Pizza", cal: 298, p: 12, c: 32, f: 12, unit: "1 slice" },
+        { name: "Cheeseburger (Standard)", cal: 535, p: 30, c: 40, f: 28, unit: "1 burger" },
+
+        // Standard Staples & Ingredients
+        { name: "Chicken Breast (Cooked)", cal: 165, p: 31, c: 0, f: 3.6, unit: "100g" },
+        { name: "White Rice (Cooked)", cal: 130, p: 2.7, c: 28, f: 0.3, unit: "100g" },
+        { name: "Brown Rice (Cooked)", cal: 111, p: 2.6, c: 23, f: 0.9, unit: "100g" },
+        { name: "Whole Egg (Large)", cal: 72, p: 6.3, c: 0.4, f: 4.8, unit: "1 egg" },
+        { name: "Egg White", cal: 17, p: 3.6, c: 0.2, f: 0.1, unit: "1 egg white" },
         { name: "Salmon Fillet", cal: 206, p: 22, c: 0, f: 13, unit: "100g" },
-        {
-          name: "Canned Tuna (in water)",
-          cal: 116,
-          p: 26,
-          c: 0,
-          f: 1,
-          unit: "100g",
-        },
-        {
-          name: "Oatmeal (Cooked)",
-          cal: 158,
-          p: 6,
-          c: 27,
-          f: 3.2,
-          unit: "1 cup",
-        },
-        {
-          name: "Whey Protein Scoop",
-          cal: 120,
-          p: 24,
-          c: 3,
-          f: 1.5,
-          unit: "1 scoop",
-        },
-        {
-          name: "Greek Yogurt (Non-fat)",
-          cal: 100,
-          p: 17,
-          c: 6,
-          f: 0.7,
-          unit: "170g",
-        },
+        { name: "Canned Tuna (in water)", cal: 116, p: 26, c: 0, f: 1, unit: "100g" },
+        { name: "Oatmeal (Cooked)", cal: 158, p: 6, c: 27, f: 3.2, unit: "1 cup" },
+        { name: "Whey Protein Scoop", cal: 120, p: 24, c: 3, f: 1.5, unit: "1 scoop" },
+        { name: "Greek Yogurt (Non-fat)", cal: 100, p: 17, c: 6, f: 0.7, unit: "170g" },
         { name: "Banana", cal: 105, p: 1.3, c: 27, f: 0.3, unit: "1 medium" },
         { name: "Apple", cal: 95, p: 0.5, c: 25, f: 0.3, unit: "1 medium" },
-        { name: "Mango", cal: 99, p: 1.4, c: 25, f: 0.6, unit: "1 cup" },
+        { name: "Mango (Ripe Philippine Mango)", cal: 99, p: 1.4, c: 25, f: 0.6, unit: "1 cup" },
         { name: "Peanut Butter", cal: 188, p: 8, c: 6, f: 16, unit: "2 tbsp" },
-        { name: "Almonds", cal: 164, p: 6, c: 6, f: 14, unit: "28g (23 nuts)" },
         { name: "Avocado", cal: 240, p: 3, c: 12, f: 22, unit: "1 medium" },
-        {
-          name: "Sweet Potato (Baked)",
-          cal: 103,
-          p: 2.3,
-          c: 24,
-          f: 0.2,
-          unit: "100g",
-        },
-        {
-          name: "Broccoli (Steamed)",
-          cal: 55,
-          p: 3.7,
-          c: 11,
-          f: 0.6,
-          unit: "1 cup",
-        },
-        {
-          name: "Whole Wheat Bread",
-          cal: 80,
-          p: 4,
-          c: 13,
-          f: 1,
-          unit: "1 slice",
-        },
-        {
-          name: "Pepperoni Pizza",
-          cal: 298,
-          p: 12,
-          c: 32,
-          f: 12,
-          unit: "1 slice",
-        },
-        {
-          name: "Burger (Cheeseburger)",
-          cal: 535,
-          p: 30,
-          c: 40,
-          f: 28,
-          unit: "1 burger",
-        },
-        { name: "French Fries", cal: 365, p: 4, c: 48, f: 17, unit: "Medium" },
+        { name: "Sweet Potato (Camote - Baked)", cal: 103, p: 2.3, c: 24, f: 0.2, unit: "100g" },
+        { name: "Broccoli (Steamed)", cal: 55, p: 3.7, c: 11, f: 0.6, unit: "1 cup" },
       ];
 
       // --- TITLE VAULT TAGS DEFINITION ---
       const TITLE_TAGS = [
-        {
-          id: "novice",
-          name: "🌱 Novice Tracker",
-          reqLvl: 1,
-          color: "emerald",
-        },
+        { id: "novice", name: "🌱 Novice Tracker", reqLvl: 1, color: "emerald" },
         { id: "iron", name: "🏋️ Iron Lifter", reqLvl: 2, color: "purple" },
-        {
-          id: "macro_master",
-          name: "⚡ Macro Master",
-          reqLvl: 3,
-          color: "cyan",
-        },
-        {
-          id: "metabolic_boss",
-          name: "🔥 Metabolic Boss",
-          reqLvl: 4,
-          color: "rose",
-        },
+        { id: "macro_master", name: "⚡ Macro Master", reqLvl: 3, color: "cyan" },
+        { id: "metabolic_boss", name: "🔥 Metabolic Boss", reqLvl: 4, color: "rose" },
         { id: "apex", name: "👑 Apex Athlete", reqLvl: 5, color: "gold" },
       ];
 
@@ -1507,7 +1462,6 @@
       function loadCurrentUserData() {
         const user = getCurrentUser();
 
-        // Ensure default meal times exist
         if (!user.mealTimes) {
           user.mealTimes = {
             breakfast: "08:00",
@@ -1517,7 +1471,6 @@
           };
         }
 
-        // Update Header Views
         const initials = user.name
           .split(" ")
           .map((n) => n[0])
@@ -1536,7 +1489,6 @@
         const goalFormatted = user.bio.goal.replace("_", " ").toUpperCase();
         document.getElementById("headerGoalText").innerText = goalFormatted;
 
-        // XP Update
         const targetXp = user.level * 100;
         document.getElementById(
           "xpText"
@@ -1544,7 +1496,6 @@
         const xpPercent = Math.min(100, Math.floor((user.xp / targetXp) * 100));
         document.getElementById("xpProgressBar").style.width = `${xpPercent}%`;
 
-        // Load Forms State
         document.getElementById("bioAge").value = user.bio.age;
         document.getElementById("bioGender").value = user.bio.gender;
         document.getElementById("bioWeight").value = user.bio.weight;
@@ -1552,7 +1503,6 @@
         document.getElementById("bioActivity").value = user.bio.activity;
         document.getElementById("bioGoal").value = user.bio.goal;
 
-        // Load Meal Times Form State
         document.getElementById("timeBreakfast").value =
           user.mealTimes.breakfast || "08:00";
         document.getElementById("timeLunch").value =
@@ -1562,7 +1512,6 @@
         document.getElementById("timeDinner").value =
           user.mealTimes.dinner || "19:00";
 
-        // Recalculate Metrics & Render Dynamic Components
         calculateAndRenderDashboard();
         renderMealSchedule();
         renderWorkoutSchedule();
@@ -1571,7 +1520,7 @@
         initLucide();
       }
 
-      // --- EXACT MEAL TIMES & NOTIFICATION SYSTEM ---
+      // --- CELLPHONE MEAL TIMES & NOTIFICATIONS ---
       document
         .getElementById("mealTimesForm")
         ?.addEventListener("submit", (e) => {
@@ -1584,20 +1533,19 @@
             dinner: document.getElementById("timeDinner").value,
           };
           saveCurrentUser(user);
-          showToast("Meal schedule saved! Alerts are active.", "gold");
-          renderMealSchedule();
+          showToast("Cellphone meal schedule saved! Notifications active.", "gold");
         });
 
       function requestNotificationPermission() {
         if (!("Notification" in window)) {
-          showToast("Browser does not support desktop notifications.", "rose");
+          showToast("Browser/Cell notifications not supported on this device.", "rose");
           return;
         }
         Notification.requestPermission().then((permission) => {
           if (permission === "granted") {
-            showToast("Notifications enabled successfully!", "emerald");
+            showToast("Cellphone push notifications enabled successfully!", "emerald");
             new Notification("Marife's Diet Control", {
-              body: "Meal reminders active! You will get notified on meal times.",
+              body: "Meal reminders active! You will be notified on your cellphone at meal times.",
             });
           } else {
             showToast("Notification permission was denied.", "rose");
@@ -1616,13 +1564,9 @@
           const currentTimeStr = `${hours}:${mins}`;
 
           const slots = [
-            {
-              key: "breakfast",
-              label: "Breakfast 🥣",
-              time: user.mealTimes.breakfast,
-            },
-            { key: "lunch", label: "Lunch 🍱", time: user.mealTimes.lunch },
-            { key: "snack", label: "Snack 🍎", time: user.mealTimes.snack },
+            { key: "breakfast", label: "Breakfast (Silog) 🥣", time: user.mealTimes.breakfast },
+            { key: "lunch", label: "Lunch (Pinoy Viand) 🍱", time: user.mealTimes.lunch },
+            { key: "snack", label: "Snack (Merienda) ☕", time: user.mealTimes.snack },
             { key: "dinner", label: "Dinner 🍲", time: user.mealTimes.dinner },
           ];
 
@@ -1633,25 +1577,23 @@
             ) {
               notifiedTimes[`${user.id}_${s.key}_${currentTimeStr}`] = true;
 
-              // In-app Alert
               showToast(
-                `⏰ IT'S TIME FOR ${s.label.toUpperCase()}! Log your meal now!`,
+                `⏰ CELL ALERT: IT'S TIME FOR ${s.label.toUpperCase()}! Log your meal now!`,
                 "gold"
               );
 
-              // System Desktop Push Notification
               if (
                 "Notification" in window &&
                 Notification.permission === "granted"
               ) {
                 new Notification(`Diet Alert: ${s.label}`, {
-                  body: `Hi ${user.name}, it's ${s.time}! Time to log your ${s.key}.`,
+                  body: `Hi ${user.name}, it's ${s.time}! Time to eat your scheduled meal.`,
                   icon: "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",
                 });
               }
             }
           });
-        }, 10000); // Check every 10s
+        }, 10000);
       }
 
       function format12Hour(time24) {
@@ -1762,7 +1704,7 @@
         if (filtered.length === 0) {
           resultsContainer.innerHTML = `
             <div class="col-span-full py-6 text-center text-xs text-gray-500 font-mono">
-              No matching foods found in database. Try logging custom item below!
+              No matching Philippine or fast food items found. Try logging custom item below!
             </div>
           `;
           return;
@@ -1786,7 +1728,7 @@
               onclick="quickAddFood('${escapeQuotes(item.name)}', ${
               item.cal
             }, ${item.p}, ${item.c}, ${item.f})"
-              class="bg-accentCyan/10 hover:bg-accentCyan text-accentCyan hover:text-obsidian text-[11px] font-mono font-semibold px-2.5 py-1 rounded-lg transition"
+              class="bg-accentCyan/10 hover:bg-accentCyan text-accentCyan hover:text-obsidian text-[11px] font-mono font-semibold px-2.5 py-1 rounded-lg transition whitespace-nowrap"
             >
               + Quick Add
             </button>
@@ -1849,7 +1791,7 @@
         if (user.meals.length === 0) {
           listEl.innerHTML = `
             <div class="text-center py-8 text-gray-500 font-mono text-xs border border-dashed border-white/10 rounded-xl">
-              No meals logged today. Search or add a meal above!
+              No meals logged today. Search Pinoy / fast foods or add a meal above!
             </div>
           `;
           return;
@@ -1864,7 +1806,7 @@
             return `
           <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-white/5 text-accentCyan font-bold">
+              <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-white/5 text-accentCyan font-bold whitespace-nowrap">
                 ${m.slot} ${targetTime ? `• ${targetTime}` : ""}
               </span>
               <div>
@@ -2117,23 +2059,29 @@
         `;
       }
 
-      // --- TAB SWITCHING SYSTEM ---
+      // --- TAB & SIDEBAR SWITCHING SYSTEM ---
       function switchTab(tabId) {
         document
           .querySelectorAll(".tab-content")
           .forEach((el) => el.classList.add("hidden"));
-        document.querySelectorAll(".tab-btn").forEach((btn) => {
+        
+        // Reset sidebar buttons
+        document.querySelectorAll(".sidebar-btn").forEach((btn) => {
           btn.classList.remove("bg-white/10", "text-white");
           btn.classList.add("text-gray-400");
         });
 
         const activeContent = document.getElementById(`tabContent-${tabId}`);
-        const activeBtn = document.getElementById(`tabBtn-${tabId}`);
+        const activeSidebarBtn = document.getElementById(`sidebarBtn-${tabId}`);
+        const mobileNavSelect = document.getElementById("mobileNavSelect");
 
         if (activeContent) activeContent.classList.remove("hidden");
-        if (activeBtn) {
-          activeBtn.classList.add("bg-white/10", "text-white");
-          activeBtn.classList.remove("text-gray-400");
+        if (activeSidebarBtn) {
+          activeSidebarBtn.classList.add("bg-white/10", "text-white");
+          activeSidebarBtn.classList.remove("text-gray-400");
+        }
+        if (mobileNavSelect) {
+          mobileNavSelect.value = tabId;
         }
       }
 
