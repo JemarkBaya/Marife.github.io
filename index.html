@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="boy">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,16 +16,17 @@
 
     <script>
       tailwind.config = {
+        darkMode: "class",
         theme: {
           extend: {
             colors: {
-              obsidian: "#090D16",
-              cardBg: "rgba(17, 24, 39, 0.75)",
+              obsidian: "#0F172A",
+              cardBg: "rgba(15, 23, 42, 0.75)",
               borderGlow: "rgba(255, 255, 255, 0.08)",
               accentGold: "#F59E0B",
               accentEmerald: "#10B981",
-              accentPurple: "#8B5CF6",
-              accentCyan: "#06B6D4",
+              accentGirl: "#EC4899",
+              accentBoy: "#3B82F6",
               accentRose: "#F43F5E",
             },
             fontFamily: {
@@ -38,18 +39,36 @@
     </script>
 
     <style>
+      /* Dynamic Theme Variables */
+      :root {
+        --primary-accent: #3b82f6;
+        --primary-glow: rgba(59, 130, 246, 0.4);
+        --gradient-from: rgba(59, 130, 246, 0.15);
+        --gradient-to: rgba(16, 185, 129, 0.15);
+      }
+
+      [data-theme="girl"] {
+        --primary-accent: #ec4899;
+        --primary-glow: rgba(236, 72, 153, 0.4);
+        --gradient-from: rgba(236, 72, 153, 0.15);
+        --gradient-to: rgba(244, 63, 94, 0.15);
+      }
+
+      [data-theme="boy"] {
+        --primary-accent: #3b82f6;
+        --primary-glow: rgba(59, 130, 246, 0.4);
+        --gradient-from: rgba(59, 130, 246, 0.15);
+        --gradient-to: rgba(16, 185, 129, 0.15);
+      }
+
       body {
-        background-color: #090d16;
+        background-color: #0f172a;
         background-image: radial-gradient(
             at 0% 0%,
-            rgba(139, 92, 246, 0.12) 0px,
+            var(--gradient-from) 0px,
             transparent 50%
           ),
-          radial-gradient(
-            at 100% 100%,
-            rgba(6, 182, 212, 0.1) 0px,
-            transparent 50%
-          ),
+          radial-gradient(at 100% 100%, var(--gradient-to) 0px, transparent 50%),
           radial-gradient(
             at 50% 50%,
             rgba(16, 185, 129, 0.05) 0px,
@@ -60,7 +79,7 @@
       }
 
       .glass-card {
-        background: rgba(17, 24, 39, 0.75);
+        background: rgba(15, 23, 42, 0.75);
         backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -87,33 +106,50 @@
         pointer-events: none;
       }
 
+      .glow-primary {
+        box-shadow: 0 0 20px -5px var(--primary-glow);
+      }
       .glow-emerald {
         box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.4);
       }
       .glow-gold {
         box-shadow: 0 0 20px -5px rgba(245, 158, 11, 0.4);
       }
-      .glow-purple {
-        box-shadow: 0 0 20px -5px rgba(139, 92, 246, 0.4);
+      .glow-girl {
+        box-shadow: 0 0 20px -5px rgba(236, 72, 153, 0.4);
+      }
+      .glow-boy {
+        box-shadow: 0 0 20px -5px rgba(59, 130, 246, 0.4);
+      }
+
+      /* Dynamic Theme Switches */
+      .theme-bg {
+        background-color: var(--primary-accent) !important;
+      }
+      .theme-text {
+        color: var(--primary-accent) !important;
+      }
+      .theme-border {
+        border-color: var(--primary-accent) !important;
       }
 
       ::-webkit-scrollbar {
         width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #090d16;
+        background: #0f172a;
       }
       ::-webkit-scrollbar-thumb {
-        background: #1f2937;
+        background: #1e293b;
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #374151;
+        background: #334155;
       }
     </style>
   </head>
   <body
-    class="min-h-screen font-sans pb-12 antialiased selection:bg-accentPurple selection:text-white"
+    class="min-h-screen font-sans pb-12 antialiased selection:bg-accentGirl selection:text-white"
   >
     <!-- Toast Notification Container -->
     <div
@@ -123,104 +159,183 @@
 
     <!-- MAIN APP WRAPPER WITH PERSISTENT SIDEBAR -->
     <div class="flex min-h-screen">
-      
       <!-- DESKTOP / MOBILE SIDEBAR -->
-      <aside class="w-64 glass-card border-r border-white/10 hidden lg:flex flex-col justify-between p-6 sticky top-0 h-screen overflow-y-auto">
+      <aside
+        class="w-64 glass-card border-r border-white/10 hidden lg:flex flex-col justify-between p-6 sticky top-0 h-screen overflow-y-auto"
+      >
         <div>
           <!-- Sidebar Brand / Logo -->
           <div class="flex items-center gap-3 mb-8">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-accentPurple to-accentCyan flex items-center justify-center font-mono font-bold text-white glow-purple">
+            <div
+              class="w-10 h-10 rounded-xl theme-bg flex items-center justify-center font-mono font-bold text-white glow-primary"
+            >
               M
             </div>
             <div>
-              <h2 class="font-mono text-sm font-bold text-white tracking-tight">MARIFE'S DIET</h2>
-              <span class="text-[10px] text-accentCyan font-mono">CONTROL ENGINE v2.6</span>
+              <h2 class="font-mono text-sm font-bold text-white tracking-tight">
+                MARIFE'S DIET
+              </h2>
+              <span class="text-[10px] theme-text font-mono"
+                >CONTROL ENGINE v2.6</span
+              >
+            </div>
+          </div>
+
+          <!-- Theme Selector Card in Sidebar -->
+          <div
+            class="mb-6 p-3 rounded-xl bg-slate-900/80 border border-white/10"
+          >
+            <label
+              class="block text-[10px] font-mono text-gray-400 uppercase tracking-wider mb-2"
+            >
+              🎨 Interface Theme
+            </label>
+            <div class="grid grid-cols-2 gap-2">
+              <button
+                onclick="setTheme('boy')"
+                id="themeBtnBoy"
+                class="py-1.5 px-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5 transition bg-blue-500 text-white"
+              >
+                👦 Boy
+              </button>
+              <button
+                onclick="setTheme('girl')"
+                id="themeBtnGirl"
+                class="py-1.5 px-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5 transition bg-slate-800 text-gray-400 hover:text-white"
+              >
+                👧 Girl
+              </button>
             </div>
           </div>
 
           <!-- Sidebar Navigation Menu -->
           <nav class="space-y-1.5">
-            <p class="text-[10px] font-mono text-gray-500 uppercase px-3 mb-2 tracking-wider">Features Menu</p>
-            
+            <p
+              class="text-[10px] font-mono text-gray-500 uppercase px-3 mb-2 tracking-wider"
+            >
+              Features Menu
+            </p>
+
             <button
               onclick="switchTab('meals')"
               id="sidebarBtn-meals"
               class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 bg-white/10 text-white transition"
             >
-              <i data-lucide="utensils" class="w-4 h-4 text-accentEmerald"></i> Meal Diary
+              <i data-lucide="utensils" class="w-4 h-4 text-accentEmerald"></i>
+              Meal Diary
             </button>
-            
+
             <button
               onclick="switchTab('schedule')"
               id="sidebarBtn-schedule"
               class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
             >
-              <i data-lucide="clock" class="w-4 h-4 text-accentGold"></i> Meal Times & Alerts
+              <i data-lucide="clock" class="w-4 h-4 text-accentGold"></i> Meal
+              Times & Alerts
             </button>
-            
+
             <button
               onclick="switchTab('workouts')"
               id="sidebarBtn-workouts"
               class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
             >
-              <i data-lucide="flame" class="w-4 h-4 text-accentRose"></i> Exercise (MET)
+              <i data-lucide="flame" class="w-4 h-4 text-accentRose"></i>
+              Exercise (MET)
             </button>
-            
+
             <button
               onclick="switchTab('quests')"
               id="sidebarBtn-quests"
               class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
             >
-              <i data-lucide="award" class="w-4 h-4 text-accentGold"></i> Vault & Quests
+              <i data-lucide="award" class="w-4 h-4 text-accentGold"></i> Vault
+              & Quests
             </button>
-            
+
             <button
               onclick="switchTab('profile')"
               id="sidebarBtn-profile"
               class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
             >
-              <i data-lucide="sliders" class="w-4 h-4 text-accentCyan"></i> Biometrics Engine
+              <i data-lucide="sliders" class="w-4 h-4 theme-text"></i>
+              Biometrics Engine
             </button>
-            
+
             <button
               onclick="switchTab('users')"
               id="sidebarBtn-users"
               class="sidebar-btn w-full py-2.5 px-3 rounded-xl text-xs font-semibold font-mono flex items-center gap-3 text-gray-400 hover:text-white transition"
             >
-              <i data-lucide="users" class="w-4 h-4 text-accentPurple"></i> User Management
+              <i data-lucide="users" class="w-4 h-4 text-accentGirl"></i> User
+              Management
             </button>
           </nav>
         </div>
 
-        <!-- Sidebar Footer / Quick Cellphone Notification Status Widget -->
+        <!-- Sidebar Footer -->
         <div class="pt-4 border-t border-white/10">
-          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/5 space-y-2">
+          <div
+            class="p-3 rounded-xl bg-slate-900/60 border border-white/5 space-y-2"
+          >
             <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-gray-400 flex items-center gap-1.5"><i data-lucide="smartphone" class="w-3.5 h-3.5 text-accentGold"></i> Alerts</span>
-              <span id="sidebarAlertStatus" class="text-accentGold font-bold text-[10px]">ACTIVE</span>
+              <span class="text-gray-400 flex items-center gap-1.5"
+                ><i
+                  data-lucide="smartphone"
+                  class="w-3.5 h-3.5 text-accentGold"
+                ></i>
+                Alerts</span
+              >
+              <span
+                id="sidebarAlertStatus"
+                class="text-accentGold font-bold text-[10px]"
+                >ACTIVE</span
+              >
             </div>
-            <p class="text-[10px] text-gray-500 leading-tight">Cell/Push alarms enabled for Philippine & Fast Food meal tracking.</p>
+            <p class="text-[10px] text-gray-500 leading-tight">
+              Cell/Push alarms enabled for Philippine & Fast Food meal tracking.
+            </p>
           </div>
         </div>
       </aside>
 
       <!-- MAIN CONTENT CONTAINER -->
       <div class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        
-        <!-- MOBILE TOP NAVBAR FOR FEATURES (Visible on small screens) -->
-        <div class="lg:hidden glass-card rounded-2xl p-3 mb-6 flex items-center justify-between">
+        <!-- MOBILE TOP NAVBAR FOR FEATURES & THEME -->
+        <div
+          class="lg:hidden glass-card rounded-2xl p-3 mb-6 flex items-center justify-between gap-3"
+        >
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-lg bg-accentPurple flex items-center justify-center font-mono font-bold text-white text-xs">M</div>
-            <span class="font-mono text-xs font-bold text-white">Diet Control</span>
+            <div
+              class="w-8 h-8 rounded-lg theme-bg flex items-center justify-center font-mono font-bold text-white text-xs"
+            >
+              M
+            </div>
+            <span class="font-mono text-xs font-bold text-white"
+              >Diet Control</span
+            >
           </div>
-          <select onchange="switchTab(this.value)" id="mobileNavSelect" class="bg-slate-900 text-xs font-mono text-white p-2 rounded-xl border border-white/10 focus:outline-none">
-            <option value="meals">Meal Diary</option>
-            <option value="schedule">Meal Times & Alerts</option>
-            <option value="workouts">Exercise (MET)</option>
-            <option value="quests">Vault & Quests</option>
-            <option value="profile">Biometrics Engine</option>
-            <option value="users">User Management</option>
-          </select>
+          <div class="flex items-center gap-2">
+            <select
+              id="mobileThemeSelect"
+              onchange="setTheme(this.value)"
+              class="bg-slate-900 text-xs font-mono text-white p-2 rounded-xl border border-white/10 focus:outline-none"
+            >
+              <option value="boy">👦 Boy Theme</option>
+              <option value="girl">👧 Girl Theme</option>
+            </select>
+            <select
+              onchange="switchTab(this.value)"
+              id="mobileNavSelect"
+              class="bg-slate-900 text-xs font-mono text-white p-2 rounded-xl border border-white/10 focus:outline-none"
+            >
+              <option value="meals">Meal Diary</option>
+              <option value="schedule">Meal Times & Alerts</option>
+              <option value="workouts">Exercise (MET)</option>
+              <option value="quests">Vault & Quests</option>
+              <option value="profile">Biometrics Engine</option>
+              <option value="users">User Management</option>
+            </select>
+          </div>
         </div>
 
         <!-- HEADER & USER GAMIFICATION BAR -->
@@ -233,7 +348,7 @@
             <div class="flex items-center gap-4">
               <div class="relative">
                 <div
-                  class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-accentPurple via-accentCyan to-accentEmerald p-0.5 glow-purple"
+                  class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-accentGirl via-accentBoy to-accentEmerald p-0.5 glow-primary"
                 >
                   <div
                     id="userAvatarInitials"
@@ -265,9 +380,11 @@
                   </span>
                 </div>
                 <p class="text-xs text-gray-400 mt-1 flex items-center gap-2">
-                  <span id="userRoleText">EIM Specialist & Fitness Tracker</span>
+                  <span id="userRoleText"
+                    >EIM Specialist & Fitness Tracker</span
+                  >
                   •
-                  <span class="text-accentCyan font-mono"
+                  <span class="theme-text font-mono"
                     >Target: <span id="headerGoalText">Fat Loss</span></span
                   >
                 </p>
@@ -278,7 +395,7 @@
             <div
               class="flex items-center gap-2 bg-slate-900/80 p-2 rounded-xl border border-white/10"
             >
-              <i data-lucide="users" class="w-4 h-4 text-accentCyan"></i>
+              <i data-lucide="users" class="w-4 h-4 theme-text"></i>
               <select
                 id="activeUserSelectHeader"
                 onchange="switchUser(this.value)"
@@ -324,10 +441,12 @@
                 <h2
                   class="font-mono text-sm uppercase text-gray-400 tracking-wider flex items-center gap-2"
                 >
-                  <i data-lucide="activity" class="w-4 h-4 text-accentCyan"></i>
+                  <i data-lucide="activity" class="w-4 h-4 theme-text"></i>
                   Daily Budget
                 </h2>
-                <span class="text-xs font-mono text-gray-500" id="currentDateText"
+                <span
+                  class="text-xs font-mono text-gray-500"
+                  id="currentDateText"
                   >Today</span
                 >
               </div>
@@ -354,7 +473,7 @@
                 <div class="p-2 rounded-lg bg-white/5">
                   <div class="text-xs text-gray-400">Target</div>
                   <div
-                    class="font-mono font-bold text-accentCyan text-sm mt-0.5"
+                    class="font-mono font-bold theme-text text-sm mt-0.5"
                     id="targetCalText"
                   >
                     0
@@ -386,7 +505,7 @@
               <h2
                 class="font-mono text-sm uppercase text-gray-400 tracking-wider flex items-center gap-2"
               >
-                <i data-lucide="pie-chart" class="w-4 h-4 text-accentPurple"></i>
+                <i data-lucide="pie-chart" class="w-4 h-4 theme-text"></i>
                 Macro Targets
               </h2>
 
@@ -398,7 +517,9 @@
                     >0g / 0g</span
                   >
                 </div>
-                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                <div
+                  class="w-full bg-gray-800 h-2 rounded-full overflow-hidden"
+                >
                   <div
                     id="proteinBar"
                     class="bg-accentEmerald h-full transition-all duration-300"
@@ -411,14 +532,16 @@
               <div>
                 <div class="flex justify-between text-xs mb-1.5">
                   <span class="text-gray-300 font-medium">Carbohydrates</span>
-                  <span class="font-mono text-accentCyan" id="carbsText"
+                  <span class="font-mono theme-text" id="carbsText"
                     >0g / 0g</span
                   >
                 </div>
-                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                <div
+                  class="w-full bg-gray-800 h-2 rounded-full overflow-hidden"
+                >
                   <div
                     id="carbsBar"
-                    class="bg-accentCyan h-full transition-all duration-300"
+                    class="theme-bg h-full transition-all duration-300"
                     style="width: 0%"
                   ></div>
                 </div>
@@ -432,7 +555,9 @@
                     >0g / 0g</span
                   >
                 </div>
-                <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                <div
+                  class="w-full bg-gray-800 h-2 rounded-full overflow-hidden"
+                >
                   <div
                     id="fatsBar"
                     class="bg-accentGold h-full transition-all duration-300"
@@ -444,16 +569,16 @@
 
             <!-- SMART DEFICIT & CHEAT DAY BALANCER -->
             <div
-              class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentPurple"
+              class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 theme-border"
             >
               <div class="flex items-center justify-between mb-3">
                 <h3
-                  class="font-mono text-sm font-bold text-accentPurple flex items-center gap-2"
+                  class="font-mono text-sm font-bold theme-text flex items-center gap-2"
                 >
                   <i data-lucide="scale" class="w-4 h-4"></i> Cheat Day Balancer
                 </h3>
                 <span
-                  class="text-[10px] font-mono bg-accentPurple/20 text-accentPurple px-2 py-0.5 rounded"
+                  class="text-[10px] font-mono bg-white/10 theme-text px-2 py-0.5 rounded"
                   >AUTO-OFFSET</span
                 >
               </div>
@@ -474,7 +599,7 @@
                     placeholder="e.g. 750"
                     min="50"
                     max="3000"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentPurple"
+                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none theme-border"
                   />
                 </div>
                 <div>
@@ -483,7 +608,7 @@
                   >
                   <select
                     id="spreadDaysInput"
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentPurple"
+                    class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none theme-border"
                   >
                     <option value="2">2 Days</option>
                     <option value="3" selected>3 Days</option>
@@ -494,7 +619,7 @@
                 <div class="flex gap-2 pt-1">
                   <button
                     type="submit"
-                    class="w-full bg-accentPurple hover:bg-purple-600 text-white font-semibold text-xs py-2.5 rounded-xl transition duration-200"
+                    class="w-full theme-bg hover:opacity-90 text-white font-semibold text-xs py-2.5 rounded-xl transition duration-200"
                   >
                     Apply Rebalance
                   </button>
@@ -509,36 +634,53 @@
               </form>
               <div
                 id="balancerStatus"
-                class="hidden mt-3 p-2.5 rounded-xl bg-accentPurple/10 border border-accentPurple/30 text-[11px] text-purple-300 font-mono text-center"
+                class="hidden mt-3 p-2.5 rounded-xl bg-white/5 border border-white/10 text-[11px] theme-text font-mono text-center"
               ></div>
             </div>
           </div>
 
           <!-- RIGHT COLUMN: INTERACTIVE TABS & LOGGING (8 COLS) -->
           <div class="lg:col-span-8 space-y-6">
-
             <!-- TAB CONTENT 1: MEAL DIARY -->
             <div id="tabContent-meals" class="tab-content space-y-6">
-              <!-- FOOD CALORIE SEARCH ENGINE (Philippine Foods & Fast Foods Included) -->
+              <!-- FOOD CALORIE SEARCH ENGINE (Separated Categories) -->
               <div
-                class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentCyan"
+                class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 theme-border"
               >
                 <div class="flex items-center justify-between mb-3">
                   <h3
                     class="font-mono text-sm uppercase text-gray-200 tracking-wider flex items-center gap-2"
                   >
-                    <i data-lucide="search" class="w-4 h-4 text-accentCyan"></i>
-                    Food Database & Calorie Search (Pinoy & Fast Foods)
+                    <i data-lucide="search" class="w-4 h-4 theme-text"></i>
+                    Food Database & Calorie Search
                   </h3>
-                  <span
-                    class="text-[10px] font-mono bg-accentCyan/20 text-accentCyan px-2 py-0.5 rounded"
-                    id="foodDatabaseCount"
-                  >
-                    60+ FOODS
-                  </span>
+                  <div class="flex items-center gap-2">
+                    <select
+                      id="foodCategoryFilter"
+                      onchange="handleFoodSearch()"
+                      class="bg-slate-900 text-[11px] font-mono text-white px-2 py-1 rounded-lg border border-white/10 focus:outline-none"
+                    >
+                      <option value="all">All Categories</option>
+                      <option value="filipino">🇵🇭 Filipino Foods</option>
+                      <option value="fastfood">🍔 Fast Foods</option>
+                      <option value="staple">🌾 Staples & Ingredients</option>
+                    </select>
+                    <span
+                      class="text-[10px] font-mono bg-white/10 theme-text px-2 py-0.5 rounded"
+                      id="foodDatabaseCount"
+                    >
+                      70+ FOODS
+                    </span>
+                  </div>
                 </div>
                 <p class="text-xs text-gray-400 mb-4">
-                  Search Filipino favorites (<i>Chicken Adobo, Pork Sinigang, Halo-Halo, Pancit, Lumpia, Sisig, Mang Inasal</i>) or fast food items (<i>Jollibee Chickenjoy, McDonald's Burger, Fries</i>). Click <b>"Quick Add"</b> to log instantly!
+                  Search Filipino favorites (<i
+                    >Chicken Adobo, Pork Sinigang, Halo-Halo</i
+                  >), local & Western fast food (<i
+                    >Jollibee Chickenjoy, Mang Inasal, Chowking Chao Fan,
+                    McDonald's</i
+                  >), or ingredients. Filter by category or click
+                  <b>"Quick Add"</b> to log instantly!
                 </p>
 
                 <!-- Search Bar Input -->
@@ -547,8 +689,8 @@
                     type="text"
                     id="foodSearchInput"
                     oninput="handleFoodSearch()"
-                    placeholder="Search Pinoy dishes, fast food, or ingredients (e.g. Adobo, Sinigang, Chickenjoy, Rice)..."
-                    class="w-full bg-slate-900 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accentCyan"
+                    placeholder="Search dishes, fast food, or ingredients (e.g. Chickenjoy, Mang Inasal, Chao Fan, Adobo)..."
+                    class="w-full bg-slate-900 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none theme-border"
                   />
                   <i
                     data-lucide="search"
@@ -581,7 +723,8 @@
                   class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3"
                 >
                   <div class="lg:col-span-4">
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >FOOD NAME</label
                     >
                     <input
@@ -593,7 +736,8 @@
                     />
                   </div>
                   <div class="lg:col-span-3">
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >MEAL SLOT</label
                     >
                     <select
@@ -607,7 +751,8 @@
                     </select>
                   </div>
                   <div class="lg:col-span-2">
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >CALORIES</label
                     >
                     <input
@@ -630,7 +775,8 @@
 
                   <!-- Macros Sub-row -->
                   <div class="lg:col-span-4">
-                    <label class="block text-[10px] font-mono text-gray-500 mb-1"
+                    <label
+                      class="block text-[10px] font-mono text-gray-500 mb-1"
                       >PROTEIN (G)</label
                     >
                     <input
@@ -641,7 +787,8 @@
                     />
                   </div>
                   <div class="lg:col-span-4">
-                    <label class="block text-[10px] font-mono text-gray-500 mb-1"
+                    <label
+                      class="block text-[10px] font-mono text-gray-500 mb-1"
                       >CARBS (G)</label
                     >
                     <input
@@ -652,7 +799,8 @@
                     />
                   </div>
                   <div class="lg:col-span-4">
-                    <label class="block text-[10px] font-mono text-gray-500 mb-1"
+                    <label
+                      class="block text-[10px] font-mono text-gray-500 mb-1"
                       >FATS (G)</label
                     >
                     <input
@@ -673,7 +821,9 @@
                   >
                     Today's Schedule
                   </h3>
-                  <span class="text-xs text-gray-500 font-mono" id="mealCountText"
+                  <span
+                    class="text-xs text-gray-500 font-mono"
+                    id="mealCountText"
                     >0 items logged</span
                   >
                 </div>
@@ -689,16 +839,22 @@
               <div
                 class="glass-card glass-card-glow rounded-2xl p-6 border-l-4 border-l-accentGold"
               >
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+                <div
+                  class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4"
+                >
                   <div>
                     <h3
                       class="font-mono text-sm uppercase text-gray-200 tracking-wider flex items-center gap-2"
                     >
-                      <i data-lucide="smartphone" class="w-4 h-4 text-accentGold"></i>
+                      <i
+                        data-lucide="smartphone"
+                        class="w-4 h-4 text-accentGold"
+                      ></i>
                       Cellphone & Device Meal Time Notifications
                     </h3>
                     <p class="text-xs text-gray-400 mt-1">
-                      Set target meal hours. Receive immediate audio and push alerts on your cellphone or browser when it's mealtime!
+                      Set target meal hours. Receive immediate audio and push
+                      alerts on your cellphone or browser when it's mealtime!
                     </p>
                   </div>
                   <button
@@ -706,7 +862,8 @@
                     onclick="requestNotificationPermission()"
                     class="bg-accentGold/20 hover:bg-accentGold hover:text-obsidian text-accentGold text-xs font-mono font-bold px-3 py-2 rounded-xl transition border border-accentGold/30 flex items-center gap-1.5 whitespace-nowrap"
                   >
-                    <i data-lucide="bell-ring" class="w-3.5 h-3.5"></i> Enable Cell Alerts
+                    <i data-lucide="bell-ring" class="w-3.5 h-3.5"></i> Enable
+                    Cell Alerts
                   </button>
                 </div>
 
@@ -741,7 +898,7 @@
                   >
                     <div>
                       <div
-                        class="flex items-center gap-2 text-xs font-bold text-accentCyan uppercase font-mono"
+                        class="flex items-center gap-2 text-xs font-bold theme-text uppercase font-mono"
                       >
                         <i data-lucide="sun-medium" class="w-4 h-4"></i> Lunch
                       </div>
@@ -762,9 +919,10 @@
                   >
                     <div>
                       <div
-                        class="flex items-center gap-2 text-xs font-bold text-accentPurple uppercase font-mono"
+                        class="flex items-center gap-2 text-xs font-bold text-accentGirl uppercase font-mono"
                       >
-                        <i data-lucide="coffee" class="w-4 h-4"></i> Snack (Mirienda)
+                        <i data-lucide="coffee" class="w-4 h-4"></i> Snack
+                        (Mirienda)
                       </div>
                       <p class="text-[10px] text-gray-400 mt-0.5">
                         Afternoon merienda break
@@ -803,7 +961,8 @@
                       type="submit"
                       class="w-full bg-accentGold hover:bg-amber-600 text-obsidian font-bold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2"
                     >
-                      <i data-lucide="save" class="w-4 h-4"></i> Save Cellphone Notification Schedule
+                      <i data-lucide="save" class="w-4 h-4"></i> Save Cellphone
+                      Notification Schedule
                     </button>
                   </div>
                 </form>
@@ -829,7 +988,8 @@
                   class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4"
                 >
                   <div class="lg:col-span-5">
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >EXERCISE / ACTIVITY</label
                     >
                     <select
@@ -848,14 +1008,17 @@
                       <option value="7.5">
                         Bicycling - Moderate Effort (MET 7.5)
                       </option>
-                      <option value="8.0">Swimming Lap Training (MET 8.0)</option>
+                      <option value="8.0">
+                        Swimming Lap Training (MET 8.0)
+                      </option>
                       <option value="3.5">
                         Brisk Walking - 3.5 mph (MET 3.5)
                       </option>
                     </select>
                   </div>
                   <div class="lg:col-span-4">
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >DURATION (MINUTES)</label
                     >
                     <input
@@ -873,8 +1036,8 @@
                       type="submit"
                       class="w-full bg-accentRose hover:bg-rose-600 text-white font-bold text-xs py-2.5 rounded-xl transition duration-200 flex items-center justify-center gap-2"
                     >
-                      <i data-lucide="flame" class="w-4 h-4"></i> Log Workout (+35
-                      XP)
+                      <i data-lucide="flame" class="w-4 h-4"></i> Log Workout
+                      (+35 XP)
                     </button>
                   </div>
                 </form>
@@ -902,7 +1065,10 @@
                     <h3
                       class="font-mono text-sm uppercase text-gray-300 tracking-wider flex items-center gap-2"
                     >
-                      <i data-lucide="shield" class="w-4 h-4 text-accentGold"></i>
+                      <i
+                        data-lucide="shield"
+                        class="w-4 h-4 text-accentGold"
+                      ></i>
                       Title Tag Vault
                     </h3>
                     <p class="text-xs text-gray-400 mt-0.5">
@@ -929,10 +1095,7 @@
                 <h3
                   class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4 flex items-center gap-2"
                 >
-                  <i
-                    data-lucide="check-square"
-                    class="w-4 h-4 text-accentCyan"
-                  ></i>
+                  <i data-lucide="check-square" class="w-4 h-4 theme-text"></i>
                   Daily Quests
                 </h3>
                 <div class="space-y-3" id="questsList">
@@ -947,12 +1110,12 @@
                 <h3
                   class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-2 flex items-center gap-2"
                 >
-                  <i data-lucide="sliders" class="w-4 h-4 text-accentCyan"></i>
+                  <i data-lucide="sliders" class="w-4 h-4 theme-text"></i>
                   Mifflin-St Jeor Biometrics Engine
                 </h3>
                 <p class="text-xs text-gray-400 mb-6">
-                  Updating your parameters immediately recalculates BMR, TDEE, and
-                  optimal macro distributions.
+                  Updating your parameters immediately recalculates BMR, TDEE,
+                  and optimal macro distributions.
                 </p>
 
                 <form
@@ -960,7 +1123,8 @@
                   class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
                 >
                   <div>
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >AGE</label
                     >
                     <input
@@ -969,23 +1133,25 @@
                       required
                       min="12"
                       max="100"
-                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none theme-border"
                     />
                   </div>
                   <div>
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >GENDER</label
                     >
                     <select
                       id="bioGender"
-                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none theme-border"
                     >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="male">Boy / Male</option>
+                      <option value="female">Girl / Female</option>
                     </select>
                   </div>
                   <div>
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >WEIGHT (KG)</label
                     >
                     <input
@@ -995,11 +1161,12 @@
                       step="0.1"
                       min="30"
                       max="250"
-                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none theme-border"
                     />
                   </div>
                   <div>
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >HEIGHT (CM)</label
                     >
                     <input
@@ -1008,19 +1175,22 @@
                       required
                       min="100"
                       max="230"
-                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none theme-border"
                     />
                   </div>
                   <div>
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >ACTIVITY LEVEL</label
                     >
                     <select
                       id="bioActivity"
-                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none theme-border"
                     >
                       <option value="1.2">Sedentary (Office/Desk)</option>
-                      <option value="1.375">Lightly Active (1-3 days/wk)</option>
+                      <option value="1.375">
+                        Lightly Active (1-3 days/wk)
+                      </option>
                       <option value="1.55" selected>
                         Moderately Active (3-5 days/wk)
                       </option>
@@ -1031,12 +1201,13 @@
                     </select>
                   </div>
                   <div>
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >PRIMARY GOAL</label
                     >
                     <select
                       id="bioGoal"
-                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accentCyan"
+                      class="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none theme-border"
                     >
                       <option value="fat_loss">Fat Loss (-20% Deficit)</option>
                       <option value="maintenance">
@@ -1050,7 +1221,7 @@
                   <div class="sm:col-span-2 lg:col-span-3 pt-2">
                     <button
                       type="submit"
-                      class="w-full bg-accentCyan hover:bg-cyan-600 text-obsidian font-bold text-xs py-2.5 rounded-xl transition duration-200"
+                      class="w-full theme-bg hover:opacity-90 text-white font-bold text-xs py-2.5 rounded-xl transition duration-200"
                     >
                       Recalculate Biometrics & Target Macros
                     </button>
@@ -1068,7 +1239,10 @@
                 <h3
                   class="font-mono text-sm uppercase text-gray-200 tracking-wider mb-2 flex items-center gap-2"
                 >
-                  <i data-lucide="user-plus" class="w-4 h-4 text-accentGold"></i>
+                  <i
+                    data-lucide="user-plus"
+                    class="w-4 h-4 text-accentGold"
+                  ></i>
                   Add / Register New Player
                 </h3>
                 <p class="text-xs text-gray-400 mb-4">
@@ -1081,7 +1255,8 @@
                   class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3"
                 >
                   <div class="lg:col-span-4">
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >PLAYER / USER NAME</label
                     >
                     <input
@@ -1093,7 +1268,8 @@
                     />
                   </div>
                   <div class="lg:col-span-5">
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >ROLE / TITLE</label
                     >
                     <input
@@ -1104,7 +1280,8 @@
                     />
                   </div>
                   <div class="lg:col-span-3">
-                    <label class="block text-[11px] font-mono text-gray-400 mb-1"
+                    <label
+                      class="block text-[11px] font-mono text-gray-400 mb-1"
                       >GOAL</label
                     >
                     <select
@@ -1133,7 +1310,7 @@
                 <h3
                   class="font-mono text-sm uppercase text-gray-300 tracking-wider mb-4 flex items-center gap-2"
                 >
-                  <i data-lucide="users" class="w-4 h-4 text-accentCyan"></i>
+                  <i data-lucide="users" class="w-4 h-4 theme-text"></i>
                   Registered Players
                 </h3>
                 <div
@@ -1151,68 +1328,596 @@
 
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-      // --- DATABASE OF FOOD ITEMS (Including Philippine Foods & Fast Foods)[cite: 1] ---
+      // --- DATABASE OF FOOD ITEMS (Expanded with Source Data) ---
       const FOOD_DATABASE = [
-        // Philippine Foods (Pinoy Delicacies & Viands)[cite: 1]
-        { name: "Chicken Adobo (Adobong Manok)", cal: 245, p: 22, c: 5, f: 15, unit: "1 serving" },
-        { name: "Pork Sinigang", cal: 210, p: 18, c: 8, f: 12, unit: "1 bowl" },
-        { name: "Beef Sisig", cal: 320, p: 24, c: 4, f: 22, unit: "1 serving" },
-        { name: "Pork Sisig", cal: 360, p: 20, c: 5, f: 27, unit: "1 serving" },
-        { name: "Beef Tapa", cal: 280, p: 26, c: 6, f: 16, unit: "100g" },
-        { name: "Bangsilog (Milkfish, Egg, Rice)", cal: 450, p: 28, c: 45, f: 18, unit: "1 plate" },
-        { name: "Tapsilog (Beef Tapa, Egg, Rice)", cal: 520, p: 30, c: 50, f: 22, unit: "1 plate" },
-        { name: "Pancit Bihon", cal: 230, p: 7, c: 38, f: 6, unit: "1 cup" },
-        { name: "Pancit Canton", cal: 310, p: 8, c: 42, f: 12, unit: "1 serving" },
-        { name: "Lumpiang Shanghai (Spring Rolls)", cal: 75, p: 3, c: 6, f: 4, unit: "1 piece" },
-        { name: "Crispy Pata", cal: 650, p: 35, c: 0, f: 55, unit: "1 serving" },
-        { name: "Lechon Kawali", cal: 580, p: 32, c: 1, f: 48, unit: "100g" },
-        { name: "Bicol Express", cal: 340, p: 18, c: 7, f: 28, unit: "1 serving" },
-        { name: "Dinuguan (Pork Blood Stew)", cal: 290, p: 20, c: 6, f: 20, unit: "1 cup" },
-        { name: "Arroz Caldo (Chicken Rice Porridge)", cal: 220, p: 12, c: 30, f: 5, unit: "1 bowl" },
-        { name: "Champorado (Chocolate Rice Porridge)", cal: 280, p: 6, c: 58, f: 3, unit: "1 bowl" },
-        { name: "Halo-Halo", cal: 380, p: 6, c: 75, f: 7, unit: "1 tall glass" },
-        { name: "Turon (Banana Spring Roll)", cal: 180, p: 2, c: 30, f: 6, unit: "1 piece" },
-        { name: "Bibingka", cal: 210, p: 4, c: 32, f: 8, unit: "1 slice" },
-        { name: "Puto", cal: 50, p: 1, c: 11, f: 0.5, unit: "1 piece" },
+        // --- FILIPINO-STYLE FAST FOOD & LOCAL FAVORITES[cite: 1] ---
+        {
+          name: "Jollibee Chickenjoy (1pc with Rice)",
+          cal: 420,
+          p: 22,
+          c: 45,
+          f: 18,
+          unit: "1 meal set",
+          category: "fastfood",
+        },
+        {
+          name: "Jollibee Chickenjoy (2pc with Rice & Gravy)",
+          cal: 740,
+          p: 38,
+          c: 52,
+          f: 34,
+          unit: "1 meal set",
+          category: "fastfood",
+        },
+        {
+          name: "Jollibee Jolly Spaghetti",
+          cal: 390,
+          p: 10,
+          c: 62,
+          f: 11,
+          unit: "1 regular",
+          category: "fastfood",
+        },
+        {
+          name: "Jollibee Yumburger",
+          cal: 290,
+          p: 11,
+          c: 33,
+          f: 12,
+          unit: "1 burger",
+          category: "fastfood",
+        },
+        {
+          name: "Mang Inasal Grilled Chicken (Paa or Pecho with Unli Rice)",
+          cal: 580,
+          p: 36,
+          c: 55,
+          f: 20,
+          unit: "1 serving",
+          category: "fastfood",
+        },
+        {
+          name: "Chowking Chao Fan (Fried Rice Bowl)",
+          cal: 410,
+          p: 12,
+          c: 58,
+          f: 14,
+          unit: "1 bowl",
+          category: "fastfood",
+        },
+        {
+          name: "Chowking Beef Wonton Noodles",
+          cal: 380,
+          p: 18,
+          c: 52,
+          f: 10,
+          unit: "1 bowl",
+          category: "fastfood",
+        },
+        {
+          name: "Chowking Dim Sum (Siomai & Siopao combo)",
+          cal: 350,
+          p: 16,
+          c: 38,
+          f: 14,
+          unit: "1 serving",
+          category: "fastfood",
+        },
+        {
+          name: "Tropical Hut Classic Burger & Club Sandwich",
+          cal: 460,
+          p: 20,
+          c: 44,
+          f: 22,
+          unit: "1 serving",
+          category: "fastfood",
+        },
+        {
+          name: "Tapa King Tapsilog (Cured Beef, Garlic Rice, Egg)",
+          cal: 520,
+          p: 30,
+          c: 50,
+          f: 22,
+          unit: "1 plate",
+          category: "fastfood",
+        },
+        {
+          name: "Andok's / Chooks-to-Go Lechon Manok (Roasted Chicken)",
+          cal: 320,
+          p: 28,
+          c: 2,
+          f: 21,
+          unit: "1 quarter",
+          category: "fastfood",
+        },
+        {
+          name: "Andok's Liempo (Grilled Pork Belly)",
+          cal: 510,
+          p: 24,
+          c: 4,
+          f: 44,
+          unit: "1 serving",
+          category: "fastfood",
+        },
 
-        // Popular Fast Foods[cite: 1]
-        { name: "Jollibee Chickenjoy (1pc with Rice)", cal: 420, p: 22, c: 45, f: 18, unit: "1 meal set" },
-        { name: "Jollibee Chickenjoy (2pc with Rice & Gravy)", cal: 740, p: 38, c: 52, f: 34, unit: "1 meal set" },
-        { name: "Jollibee Jolly Spaghetti", cal: 390, p: 10, c: 62, f: 11, unit: "1 regular" },
-        { name: "Jollibee Burger Steak (2pc with Rice)", cal: 510, p: 24, c: 48, f: 25, unit: "1 meal set" },
-        { name: "McDonald's Big Mac", cal: 590, p: 25, c: 46, f: 34, unit: "1 burger" },
-        { name: "McDonald's Cheeseburger", cal: 300, p: 15, c: 32, f: 12, unit: "1 burger" },
-        { name: "McDonald's Chicken McNuggets (6pcs)", cal: 270, p: 14, c: 16, f: 16, unit: "6 pieces" },
-        { name: "French Fries (Medium)", cal: 365, p: 4, c: 48, f: 17, unit: "1 medium" },
-        { name: "Pepperoni Pizza", cal: 298, p: 12, c: 32, f: 12, unit: "1 slice" },
-        { name: "Cheeseburger (Standard)", cal: 535, p: 30, c: 40, f: 28, unit: "1 burger" },
+        // --- TRADITIONAL FILIPINO DISHES ---
+        {
+          name: "Chicken Adobo (Adobong Manok)",
+          cal: 245,
+          p: 22,
+          c: 5,
+          f: 15,
+          unit: "1 serving",
+          category: "filipino",
+        },
+        {
+          name: "Pork Sinigang",
+          cal: 210,
+          p: 18,
+          c: 8,
+          f: 12,
+          unit: "1 bowl",
+          category: "filipino",
+        },
+        {
+          name: "Beef Sisig",
+          cal: 320,
+          p: 24,
+          c: 4,
+          f: 22,
+          unit: "1 serving",
+          category: "filipino",
+        },
+        {
+          name: "Pork Sisig",
+          cal: 360,
+          p: 20,
+          c: 5,
+          f: 27,
+          unit: "1 serving",
+          category: "filipino",
+        },
+        {
+          name: "Beef Tapa",
+          cal: 280,
+          p: 26,
+          c: 6,
+          f: 16,
+          unit: "100g",
+          category: "filipino",
+        },
+        {
+          name: "Bangsilog (Milkfish, Egg, Rice)",
+          cal: 450,
+          p: 28,
+          c: 45,
+          f: 18,
+          unit: "1 plate",
+          category: "filipino",
+        },
+        {
+          name: "Pancit Bihon",
+          cal: 230,
+          p: 7,
+          c: 38,
+          f: 6,
+          unit: "1 cup",
+          category: "filipino",
+        },
+        {
+          name: "Pancit Canton",
+          cal: 310,
+          p: 8,
+          c: 42,
+          f: 12,
+          unit: "1 serving",
+          category: "filipino",
+        },
+        {
+          name: "Lumpiang Shanghai (Spring Rolls)",
+          cal: 75,
+          p: 3,
+          c: 6,
+          f: 4,
+          unit: "1 piece",
+          category: "filipino",
+        },
+        {
+          name: "Crispy Pata",
+          cal: 650,
+          p: 35,
+          c: 0,
+          f: 55,
+          unit: "1 serving",
+          category: "filipino",
+        },
+        {
+          name: "Lechon Kawali",
+          cal: 580,
+          p: 32,
+          c: 1,
+          f: 48,
+          unit: "100g",
+          category: "filipino",
+        },
+        {
+          name: "Bicol Express",
+          cal: 340,
+          p: 18,
+          c: 7,
+          f: 28,
+          unit: "1 serving",
+          category: "filipino",
+        },
+        {
+          name: "Dinuguan (Pork Blood Stew)",
+          cal: 290,
+          p: 20,
+          c: 6,
+          f: 20,
+          unit: "1 cup",
+          category: "filipino",
+        },
+        {
+          name: "Arroz Caldo (Chicken Rice Porridge)",
+          cal: 220,
+          p: 12,
+          c: 30,
+          f: 5,
+          unit: "1 bowl",
+          category: "filipino",
+        },
+        {
+          name: "Champorado (Chocolate Rice Porridge)",
+          cal: 280,
+          p: 6,
+          c: 58,
+          f: 3,
+          unit: "1 bowl",
+          category: "filipino",
+        },
+        {
+          name: "Halo-Halo",
+          cal: 380,
+          p: 6,
+          c: 75,
+          f: 7,
+          unit: "1 tall glass",
+          category: "filipino",
+        },
+        {
+          name: "Turon (Banana Spring Roll)",
+          cal: 180,
+          p: 2,
+          c: 30,
+          f: 6,
+          unit: "1 piece",
+          category: "filipino",
+        },
+        {
+          name: "Bibingka",
+          cal: 210,
+          p: 4,
+          c: 32,
+          f: 8,
+          unit: "1 slice",
+          category: "filipino",
+        },
+        {
+          name: "Puto",
+          cal: 50,
+          p: 1,
+          c: 11,
+          f: 0.5,
+          unit: "1 piece",
+          category: "filipino",
+        },
 
-        // Standard Staples & Ingredients
-        { name: "Chicken Breast (Cooked)", cal: 165, p: 31, c: 0, f: 3.6, unit: "100g" },
-        { name: "White Rice (Cooked)", cal: 130, p: 2.7, c: 28, f: 0.3, unit: "100g" },
-        { name: "Brown Rice (Cooked)", cal: 111, p: 2.6, c: 23, f: 0.9, unit: "100g" },
-        { name: "Whole Egg (Large)", cal: 72, p: 6.3, c: 0.4, f: 4.8, unit: "1 egg" },
-        { name: "Egg White", cal: 17, p: 3.6, c: 0.2, f: 0.1, unit: "1 egg white" },
-        { name: "Salmon Fillet", cal: 206, p: 22, c: 0, f: 13, unit: "100g" },
-        { name: "Canned Tuna (in water)", cal: 116, p: 26, c: 0, f: 1, unit: "100g" },
-        { name: "Oatmeal (Cooked)", cal: 158, p: 6, c: 27, f: 3.2, unit: "1 cup" },
-        { name: "Whey Protein Scoop", cal: 120, p: 24, c: 3, f: 1.5, unit: "1 scoop" },
-        { name: "Greek Yogurt (Non-fat)", cal: 100, p: 17, c: 6, f: 0.7, unit: "170g" },
-        { name: "Banana", cal: 105, p: 1.3, c: 27, f: 0.3, unit: "1 medium" },
-        { name: "Apple", cal: 95, p: 0.5, c: 25, f: 0.3, unit: "1 medium" },
-        { name: "Mango (Ripe Philippine Mango)", cal: 99, p: 1.4, c: 25, f: 0.6, unit: "1 cup" },
-        { name: "Peanut Butter", cal: 188, p: 8, c: 6, f: 16, unit: "2 tbsp" },
-        { name: "Avocado", cal: 240, p: 3, c: 12, f: 22, unit: "1 medium" },
-        { name: "Sweet Potato (Camote - Baked)", cal: 103, p: 2.3, c: 24, f: 0.2, unit: "100g" },
-        { name: "Broccoli (Steamed)", cal: 55, p: 3.7, c: 11, f: 0.6, unit: "1 cup" },
+        // --- WESTERN, BURGERS & FAST FOOD ---
+        {
+          name: "McDonald's Philippines McSpicy & Rice Meal",
+          cal: 540,
+          p: 26,
+          c: 54,
+          f: 24,
+          unit: "1 meal set",
+          category: "fastfood",
+        },
+        {
+          name: "McDonald's Big Mac",
+          cal: 590,
+          p: 25,
+          c: 46,
+          f: 34,
+          unit: "1 burger",
+          category: "fastfood",
+        },
+        {
+          name: "Burger King Whopper",
+          cal: 657,
+          p: 28,
+          c: 49,
+          f: 40,
+          unit: "1 burger",
+          category: "fastfood",
+        },
+        {
+          name: "Wendy's Square Cheeseburger & Frosty",
+          cal: 580,
+          p: 24,
+          c: 60,
+          f: 26,
+          unit: "1 combo",
+          category: "fastfood",
+        },
+        {
+          name: "Zark's Burgers Gourmet Indulgent Burger",
+          cal: 850,
+          p: 42,
+          c: 45,
+          f: 54,
+          unit: "1 burger",
+          category: "fastfood",
+        },
+        {
+          name: "KFC Hot and Crispy Chicken with Gravy & Rice",
+          cal: 590,
+          p: 32,
+          c: 46,
+          f: 30,
+          unit: "1 meal set",
+          category: "fastfood",
+        },
+        {
+          name: "Popeyes Cajun-style Fried Chicken Sandwich",
+          cal: 700,
+          p: 28,
+          c: 50,
+          f: 42,
+          unit: "1 sandwich",
+          category: "fastfood",
+        },
+        {
+          name: "ArmyNavy Burrito",
+          cal: 680,
+          p: 34,
+          c: 72,
+          f: 28,
+          unit: "1 burrito",
+          category: "fastfood",
+        },
+        {
+          name: "Greenwich Overload Pizza",
+          cal: 290,
+          p: 12,
+          c: 30,
+          f: 13,
+          unit: "1 slice",
+          category: "fastfood",
+        },
+        {
+          name: "Shakey's Thin Crust Manager's Choice Pizza & MoJo Potatoes",
+          cal: 420,
+          p: 16,
+          c: 44,
+          f: 20,
+          unit: "1 serving",
+          category: "fastfood",
+        },
+        {
+          name: "Yellow Cab Dear Darla Pizza Slice",
+          cal: 260,
+          p: 11,
+          c: 28,
+          f: 11,
+          unit: "1 slice",
+          category: "fastfood",
+        },
+        {
+          name: "Turks Shawarma Rice Meal / Pita Wrap",
+          cal: 430,
+          p: 20,
+          c: 48,
+          f: 17,
+          unit: "1 serving",
+          category: "fastfood",
+        },
+        {
+          name: "Master Siomai (Pork/Japanese Siomai)",
+          cal: 220,
+          p: 10,
+          c: 22,
+          f: 10,
+          unit: "1 order (4pcs)",
+          category: "fastfood",
+        },
+        {
+          name: "Famous Belgian Waffles (Cream Cheese/Chocolate)",
+          cal: 310,
+          p: 6,
+          c: 42,
+          f: 13,
+          unit: "1 waffle",
+          category: "fastfood",
+        },
+
+        // --- STAPLES & INGREDIENTS ---
+        {
+          name: "Chicken Breast (Cooked)",
+          cal: 165,
+          p: 31,
+          c: 0,
+          f: 3.6,
+          unit: "100g",
+          category: "staple",
+        },
+        {
+          name: "White Rice (Cooked)",
+          cal: 130,
+          p: 2.7,
+          c: 28,
+          f: 0.3,
+          unit: "100g",
+          category: "staple",
+        },
+        {
+          name: "Brown Rice (Cooked)",
+          cal: 111,
+          p: 2.6,
+          c: 23,
+          f: 0.9,
+          unit: "100g",
+          category: "staple",
+        },
+        {
+          name: "Whole Egg (Large)",
+          cal: 72,
+          p: 6.3,
+          c: 0.4,
+          f: 4.8,
+          unit: "1 egg",
+          category: "staple",
+        },
+        {
+          name: "Egg White",
+          cal: 17,
+          p: 3.6,
+          c: 0.2,
+          f: 0.1,
+          unit: "1 egg white",
+          category: "staple",
+        },
+        {
+          name: "Salmon Fillet",
+          cal: 206,
+          p: 22,
+          c: 0,
+          f: 13,
+          unit: "100g",
+          category: "staple",
+        },
+        {
+          name: "Canned Tuna (in water)",
+          cal: 116,
+          p: 26,
+          c: 0,
+          f: 1,
+          unit: "100g",
+          category: "staple",
+        },
+        {
+          name: "Oatmeal (Cooked)",
+          cal: 158,
+          p: 6,
+          c: 27,
+          f: 3.2,
+          unit: "1 cup",
+          category: "staple",
+        },
+        {
+          name: "Whey Protein Scoop",
+          cal: 120,
+          p: 24,
+          c: 3,
+          f: 1.5,
+          unit: "1 scoop",
+          category: "staple",
+        },
+        {
+          name: "Greek Yogurt (Non-fat)",
+          cal: 100,
+          p: 17,
+          c: 6,
+          f: 0.7,
+          unit: "170g",
+          category: "staple",
+        },
+        {
+          name: "Banana",
+          cal: 105,
+          p: 1.3,
+          c: 27,
+          f: 0.3,
+          unit: "1 medium",
+          category: "staple",
+        },
+        {
+          name: "Apple",
+          cal: 95,
+          p: 0.5,
+          c: 25,
+          f: 0.3,
+          unit: "1 medium",
+          category: "staple",
+        },
+        {
+          name: "Mango (Ripe Philippine Mango)",
+          cal: 99,
+          p: 1.4,
+          c: 25,
+          f: 0.6,
+          unit: "1 cup",
+          category: "staple",
+        },
+        {
+          name: "Peanut Butter",
+          cal: 188,
+          p: 8,
+          c: 6,
+          f: 16,
+          unit: "2 tbsp",
+          category: "staple",
+        },
+        {
+          name: "Avocado",
+          cal: 240,
+          p: 3,
+          c: 12,
+          f: 22,
+          unit: "1 medium",
+          category: "staple",
+        },
+        {
+          name: "Sweet Potato (Camote - Baked)",
+          cal: 103,
+          p: 2.3,
+          c: 24,
+          f: 0.2,
+          unit: "100g",
+          category: "staple",
+        },
+        {
+          name: "Broccoli (Steamed)",
+          cal: 55,
+          p: 3.7,
+          c: 11,
+          f: 0.6,
+          unit: "1 cup",
+          category: "staple",
+        },
       ];
 
       // --- TITLE VAULT TAGS DEFINITION ---
       const TITLE_TAGS = [
-        { id: "novice", name: "🌱 Novice Tracker", reqLvl: 1, color: "emerald" },
-        { id: "iron", name: "🏋️ Iron Lifter", reqLvl: 2, color: "purple" },
-        { id: "macro_master", name: "⚡ Macro Master", reqLvl: 3, color: "cyan" },
-        { id: "metabolic_boss", name: "🔥 Metabolic Boss", reqLvl: 4, color: "rose" },
+        {
+          id: "novice",
+          name: "🌱 Novice Tracker",
+          reqLvl: 1,
+          color: "emerald",
+        },
+        { id: "iron", name: "🏋️ Iron Lifter", reqLvl: 2, color: "girl" },
+        {
+          id: "macro_master",
+          name: "⚡ Macro Master",
+          reqLvl: 3,
+          color: "boy",
+        },
+        {
+          id: "metabolic_boss",
+          name: "🔥 Metabolic Boss",
+          reqLvl: 4,
+          color: "rose",
+        },
         { id: "apex", name: "👑 Apex Athlete", reqLvl: 5, color: "gold" },
       ];
 
@@ -1252,6 +1957,7 @@
       // --- CORE APP INITIALIZATION ---
       document.addEventListener("DOMContentLoaded", () => {
         initStorage();
+        initTheme();
         renderUserDropdowns();
         loadCurrentUserData();
         initLucide();
@@ -1276,6 +1982,44 @@
           localStorage.setItem("meta_pulse_active_user", "user_jemark");
         }
         activeUserId = localStorage.getItem("meta_pulse_active_user");
+      }
+
+      // --- THEME ENGINE ---
+      function initTheme() {
+        const savedTheme = localStorage.getItem("meta_pulse_theme") || "boy";
+        setTheme(savedTheme, false);
+      }
+
+      function setTheme(themeName, showMsg = true) {
+        localStorage.setItem("meta_pulse_theme", themeName);
+        document.documentElement.setAttribute("data-theme", themeName);
+
+        const btnBoy = document.getElementById("themeBtnBoy");
+        const btnGirl = document.getElementById("themeBtnGirl");
+        const mobileThemeSelect = document.getElementById("mobileThemeSelect");
+
+        if (mobileThemeSelect) mobileThemeSelect.value = themeName;
+
+        if (btnBoy && btnGirl) {
+          if (themeName === "boy") {
+            btnBoy.className =
+              "py-1.5 px-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5 transition bg-blue-500 text-white";
+            btnGirl.className =
+              "py-1.5 px-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5 transition bg-slate-800 text-gray-400 hover:text-white";
+          } else {
+            btnGirl.className =
+              "py-1.5 px-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5 transition bg-pink-500 text-white";
+            btnBoy.className =
+              "py-1.5 px-2 rounded-lg text-xs font-mono font-semibold flex items-center justify-center gap-1.5 transition bg-slate-800 text-gray-400 hover:text-white";
+          }
+        }
+
+        if (showMsg) {
+          showToast(
+            `Switched to ${themeName === "boy" ? "👦 Boy" : "👧 Girl"} Theme!`,
+            themeName === "boy" ? "boy" : "girl"
+          );
+        }
       }
 
       function getUsersData() {
@@ -1326,10 +2070,10 @@
               const isActive = u.id === activeUserId;
               return `
               <div class="p-4 rounded-xl glass-card flex items-center justify-between border ${
-                isActive ? "border-accentCyan glow-cyan" : "border-white/10"
+                isActive ? "border-accentBoy glow-boy" : "border-white/10"
               }">
                 <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-accentPurple to-accentCyan flex items-center justify-center font-mono font-bold text-white">
+                  <div class="w-10 h-10 rounded-xl theme-bg flex items-center justify-center font-mono font-bold text-white">
                     ${initials}
                   </div>
                   <div>
@@ -1337,7 +2081,7 @@
                       ${u.name}
                       ${
                         isActive
-                          ? '<span class="text-[10px] bg-accentCyan/20 text-accentCyan px-2 py-0.5 rounded font-mono">ACTIVE</span>'
+                          ? '<span class="text-[10px] bg-white/10 theme-text px-2 py-0.5 rounded font-mono">ACTIVE</span>'
                           : ""
                       }
                     </h4>
@@ -1377,7 +2121,7 @@
         localStorage.setItem("meta_pulse_active_user", userId);
         renderUserDropdowns();
         loadCurrentUserData();
-        showToast("Switched active player profile!", "cyan");
+        showToast("Switched active player profile!", "boy");
       }
 
       function removeUser(userId) {
@@ -1533,17 +2277,26 @@
             dinner: document.getElementById("timeDinner").value,
           };
           saveCurrentUser(user);
-          showToast("Cellphone meal schedule saved! Notifications active.", "gold");
+          showToast(
+            "Cellphone meal schedule saved! Notifications active.",
+            "gold"
+          );
         });
 
       function requestNotificationPermission() {
         if (!("Notification" in window)) {
-          showToast("Browser/Cell notifications not supported on this device.", "rose");
+          showToast(
+            "Browser/Cell notifications not supported on this device.",
+            "rose"
+          );
           return;
         }
         Notification.requestPermission().then((permission) => {
           if (permission === "granted") {
-            showToast("Cellphone push notifications enabled successfully!", "emerald");
+            showToast(
+              "Cellphone push notifications enabled successfully!",
+              "emerald"
+            );
             new Notification("Marife's Diet Control", {
               body: "Meal reminders active! You will be notified on your cellphone at meal times.",
             });
@@ -1564,9 +2317,21 @@
           const currentTimeStr = `${hours}:${mins}`;
 
           const slots = [
-            { key: "breakfast", label: "Breakfast (Silog) 🥣", time: user.mealTimes.breakfast },
-            { key: "lunch", label: "Lunch (Pinoy Viand) 🍱", time: user.mealTimes.lunch },
-            { key: "snack", label: "Snack (Merienda) ☕", time: user.mealTimes.snack },
+            {
+              key: "breakfast",
+              label: "Breakfast (Silog) 🥣",
+              time: user.mealTimes.breakfast,
+            },
+            {
+              key: "lunch",
+              label: "Lunch (Pinoy Viand) 🍱",
+              time: user.mealTimes.lunch,
+            },
+            {
+              key: "snack",
+              label: "Snack (Merienda) ☕",
+              time: user.mealTimes.snack,
+            },
             { key: "dinner", label: "Dinner 🍲", time: user.mealTimes.dinner },
           ];
 
@@ -1689,52 +2454,76 @@
         )}%`;
       }
 
-      // --- FOOD SEARCH & LOGGING ENGINE ---
+      // --- FOOD SEARCH & LOGGING ENGINE (WITH SEPARATED CATEGORIES) ---
       function handleFoodSearch() {
         const query = document
           .getElementById("foodSearchInput")
           .value.toLowerCase()
           .trim();
+        const selectedCategory =
+          document.getElementById("foodCategoryFilter").value;
         const resultsContainer = document.getElementById("foodSearchResults");
 
-        const filtered = FOOD_DATABASE.filter((item) =>
-          item.name.toLowerCase().includes(query)
-        );
+        const filtered = FOOD_DATABASE.filter((item) => {
+          const matchesQuery = item.name.toLowerCase().includes(query);
+          const matchesCategory =
+            selectedCategory === "all" || item.category === selectedCategory;
+          return matchesQuery && matchesCategory;
+        });
 
         if (filtered.length === 0) {
           resultsContainer.innerHTML = `
             <div class="col-span-full py-6 text-center text-xs text-gray-500 font-mono">
-              No matching Philippine or fast food items found. Try logging custom item below!
+              No matching items found. Try a different filter or log a custom item below!
             </div>
           `;
           return;
         }
 
         resultsContainer.innerHTML = filtered
-          .map(
-            (item) => `
-          <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 hover:border-accentCyan/40 transition flex items-center justify-between group">
-            <div>
-              <h4 class="text-xs font-bold text-white group-hover:text-accentCyan transition">${
-                item.name
-              }</h4>
-              <p class="text-[10px] text-gray-400 font-mono mt-0.5">
-                ${item.cal} kcal • P:${item.p}g C:${item.c}g F:${item.f}g (${
+          .map((item) => {
+            let badgeColor = "bg-white/10 theme-text border-white/20";
+            let categoryName = "Staple";
+            if (item.category === "filipino") {
+              badgeColor =
+                "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+              categoryName = "Pinoy Food";
+            } else if (item.category === "fastfood") {
+              badgeColor =
+                "bg-accentRose/10 text-accentRose border-accentRose/30";
+              categoryName = "Fast Food";
+            }
+
+            return `
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 hover:border-white/20 transition flex flex-col justify-between group gap-2">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="text-[9px] font-mono px-1.5 py-0.5 rounded border ${badgeColor}">${categoryName}</span>
+                  </div>
+                  <h4 class="text-xs font-bold text-white group-hover:theme-text transition">${
+                    item.name
+                  }</h4>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-1 pt-2 border-t border-white/5">
+                <span class="text-[10px] text-gray-400 font-mono">
+                  ${item.cal} kcal • P:${item.p}g C:${item.c}g F:${item.f}g (${
               item.unit
             })
-              </p>
-            </div>
-            <button 
-              onclick="quickAddFood('${escapeQuotes(item.name)}', ${
+                </span>
+                <button 
+                  onclick="quickAddFood('${escapeQuotes(item.name)}', ${
               item.cal
             }, ${item.p}, ${item.c}, ${item.f})"
-              class="bg-accentCyan/10 hover:bg-accentCyan text-accentCyan hover:text-obsidian text-[11px] font-mono font-semibold px-2.5 py-1 rounded-lg transition whitespace-nowrap"
-            >
-              + Quick Add
-            </button>
-          </div>
-        `
-          )
+                  class="bg-white/10 hover:theme-bg theme-text hover:text-white text-[11px] font-mono font-semibold px-2.5 py-1 rounded-lg transition whitespace-nowrap"
+                >
+                  + Quick Add
+                </button>
+              </div>
+            </div>
+          `;
+          })
           .join("");
       }
 
@@ -1806,7 +2595,7 @@
             return `
           <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-white/5 text-accentCyan font-bold whitespace-nowrap">
+              <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-white/5 theme-text font-bold whitespace-nowrap">
                 ${m.slot} ${targetTime ? `• ${targetTime}` : ""}
               </span>
               <div>
@@ -1921,7 +2710,7 @@
           user.rebalance = { surplus, days, active: true };
           saveCurrentUser(user);
           loadCurrentUserData();
-          showToast("Calorie deficit auto-rebalanced!", "purple");
+          showToast("Calorie deficit auto-rebalanced!", "girl");
         });
 
       function resetRebalance() {
@@ -1930,7 +2719,7 @@
         document.getElementById("surplusInput").value = "";
         saveCurrentUser(user);
         loadCurrentUserData();
-        showToast("Rebalance offset cleared.", "purple");
+        showToast("Rebalance offset cleared.", "girl");
       }
 
       // --- BIOMETRICS FORM UPDATE ---
@@ -1949,7 +2738,7 @@
           };
           saveCurrentUser(user);
           loadCurrentUserData();
-          showToast("Biometrics updated & targets recalculated!", "cyan");
+          showToast("Biometrics updated & targets recalculated!", "boy");
         });
 
       // --- GAMIFICATION: XP, LEVELING & TITLE VAULT ---
@@ -2064,8 +2853,7 @@
         document
           .querySelectorAll(".tab-content")
           .forEach((el) => el.classList.add("hidden"));
-        
-        // Reset sidebar buttons
+
         document.querySelectorAll(".sidebar-btn").forEach((btn) => {
           btn.classList.remove("bg-white/10", "text-white");
           btn.classList.add("text-gray-400");
@@ -2086,21 +2874,21 @@
       }
 
       // --- TOAST NOTIFICATIONS ---
-      function showToast(message, theme = "cyan") {
+      function showToast(message, theme = "boy") {
         const container = document.getElementById("toastContainer");
         if (!container) return;
 
         const toast = document.createElement("div");
         const colorMap = {
-          cyan: "border-accentCyan text-cyan-300",
+          boy: "border-accentBoy text-blue-300",
           emerald: "border-accentEmerald text-emerald-300",
           rose: "border-accentRose text-rose-300",
-          purple: "border-accentPurple text-purple-300",
+          girl: "border-accentGirl text-pink-300",
           gold: "border-accentGold text-amber-300",
         };
 
         toast.className = `glass-card border-l-4 ${
-          colorMap[theme] || colorMap.cyan
+          colorMap[theme] || colorMap.boy
         } px-4 py-3 rounded-xl text-xs font-mono pointer-events-auto flex items-center gap-2 shadow-2xl transition-all duration-300 transform translate-x-10 opacity-0`;
         toast.innerHTML = `<span>${message}</span>`;
 
