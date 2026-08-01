@@ -62,7 +62,7 @@
       }
 
       body {
-        background-color: #0f172a;
+        background-color: #ffffff;
         background-image: radial-gradient(
             at 0% 0%,
             var(--gradient-from) 0px,
@@ -1328,7 +1328,7 @@
 
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-      // --- DATABASE OF FOOD ITEMS (Expanded with Source Data) ---
+      // --- DATABASE OF FOOD ITEMS (Expanded with Source Data)[cite: 1] ---
       const FOOD_DATABASE = [
         // --- FILIPINO-STYLE FAST FOOD & LOCAL FAVORITES[cite: 1] ---
         {
@@ -2601,7 +2601,9 @@
               <div>
                 <h4 class="text-xs font-bold text-white">${m.name}</h4>
                 <p class="text-[10px] text-gray-400 font-mono">
-                  ${m.cal} kcal • P: ${m.p}g | C: ${m.c}g | F: ${m.f}g
+                  ${m.cal} kcal • 🍖 Protein: ${m.p}g | 🍞 Carbs: ${
+              m.c
+            }g | 🧈 Fats: ${m.f}g
                 </p>
               </div>
             </div>
